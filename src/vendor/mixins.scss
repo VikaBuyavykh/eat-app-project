@@ -1,0 +1,57 @@
+@import "variables";
+
+@mixin media_sm {
+  @media screen and (min-width: $breakpoint_sm) {
+    @content;
+  }
+}
+
+@mixin media_md {
+  @media screen and (min-width: $breakpoint_md) {
+    @content;
+  }
+}
+
+@mixin media_lg {
+  @media screen and (min-width: $breakpoint_lg) {
+    @content;
+  }
+}
+
+@mixin media_xl {
+  @media screen and (min-width: $breakpoint_xl) {
+    @content;
+  }
+}
+
+@mixin flex($fd-value, $jc-value, $ai-value, $gap) {
+  display: flex;
+  flex-direction: $fd-value;
+  justify-content: $jc-value;
+  align-items: $ai-value;
+  gap: $gap;
+}
+
+@mixin text($size, $weight, $color: black) {
+  margin: 0;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin circle($size) {
+  height: $size;
+  width: $size;
+  border-radius: 50%;
+}
+
+%link {
+  text-decoration: none;
+  color: $color;
+}
+
+%ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

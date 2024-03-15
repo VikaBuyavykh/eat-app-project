@@ -1,0 +1,41 @@
+@import "../../vendor/mixins.scss";
+
+.footer {
+  padding-inline: 30px;
+  padding-block: 10px;
+  background-color: Ivory;
+  @include media_sm {
+    padding-inline: 50px;
+    padding-block: 5px;
+  }
+
+  &__menu {
+    margin-inline: auto;
+    max-width: 550px;
+    @include flex(row, space-between, center, 10px);
+    @include media_md {
+      width: 75%;
+    }
+    @include media_lg {
+      width: 65%;
+    }
+
+    &_item {
+      @include flex(column, space-between, center, 5px);
+      @extend %link;
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      img {
+        width: 30px;
+      }
+
+      span {
+        @include text(x-small, 400, $color);
+      }
+    }
+  }
+}

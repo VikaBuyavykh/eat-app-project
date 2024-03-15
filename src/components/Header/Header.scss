@@ -1,0 +1,8 @@
+@import "../../vendor/variables.scss";
+@import "../../vendor/mixins.scss";
+
+.header {
+  margin: 0 auto;
+  padding-top: 20px;
+  @include text(x-large, 500, $color);
+}

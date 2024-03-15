@@ -1,0 +1,35 @@
+@import "../../vendor/mixins.scss";
+
+.cards {
+  width: 100%;
+  height: 200px;
+  flex-grow: 1;
+  background-color: ivory;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  ul {
+    width: 98%;
+    height: 100%;
+    overflow-y: scroll;
+    margin: 0 auto;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: max-content;
+    justify-items: center;
+    list-style-type: none;
+
+    @include media_sm {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media_md {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include media_lg {
+      width: 972px;
+    }
+  }
+}

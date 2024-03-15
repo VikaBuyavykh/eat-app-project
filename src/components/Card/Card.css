@@ -1,0 +1,171 @@
+li div p {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+li {
+  width: 85%;
+  margin-block: 12px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+  position: relative;
+  cursor: pointer;
+}
+li:hover div[id=bg] {
+  -webkit-box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.2);
+          box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.2);
+}
+li:hover div {
+  -webkit-transform: translateY(-1.5px);
+          transform: translateY(-1.5px);
+}
+li h3 {
+  margin: 0;
+  font-size: md;
+  font-weight: 500;
+  color: #a66a6a;
+}
+li div[id=bg] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80%;
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  -webkit-transition: -webkit-box-shadow 0.5s ease;
+  transition: -webkit-box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease, -webkit-box-shadow 0.5s ease;
+}
+li div {
+  width: 95%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  z-index: 2;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition: -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+li div img[id=img] {
+  height: 75%;
+  width: 75%;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  -webkit-box-shadow: 0px 5px 15px 3px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 5px 15px 3px rgba(0, 0, 0, 0.2);
+}
+li div p {
+  margin: 0;
+  font-size: small;
+  font-weight: 400;
+  color: #a66a6a;
+  width: 100px;
+  text-align: center;
+}
+@media screen and (min-width: 480px) {
+  li div p {
+    width: 125px;
+  }
+}
+@media screen and (min-width: 768px) {
+  li div p {
+    width: 150px;
+  }
+}
+@media screen and (min-width: 992px) {
+  li div p {
+    width: 175px;
+  }
+}
+li div div {
+  margin-bottom: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+li div div b {
+  margin: 0;
+  font-size: large;
+  font-weight: 500;
+  color: rgba(166, 106, 106, 0.3019607843);
+}
+li div div button {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: rgba(166, 106, 106, 0.3019607843);
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0px;
+  -webkit-transition: -webkit-transform 0.5s ease;
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+  cursor: pointer;
+}
+li div div button:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+li div div button img[id=button] {
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+}

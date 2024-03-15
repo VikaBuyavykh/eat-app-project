@@ -1,0 +1,79 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+
+.main {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  @include flex(column, start, center, 10px);
+
+  &__data {
+    @include text(md, 500, ivory);
+  }
+
+  &__graphic-circle {
+    margin: 0;
+    margin-top: 5px;
+    @include circle(125px);
+    border: 5px solid ivory;
+    @include flex(column, center, center, 5px);
+
+    h2 {
+      @include text(xx-large, 500, $color);
+    }
+
+    span {
+      @include text(small, 400, $color);
+    }
+  }
+
+  &__add-graphic {
+    width: 95%;
+
+    @include media_lg {
+      width: 940px;
+    }
+
+    ul {
+      padding-block: 10px;
+      padding-inline: 25px;
+      margin: 0;
+      @include flex(row, space-between, center, 10px);
+      list-style-type: none;
+      background-color: ivory;
+      border-radius: 15px;
+
+      @include media_sm {
+        padding-inline: 15%;
+      }
+
+      li {
+        margin: 0;
+        @include flex(column, center, center, 3px);
+
+        span {
+          @include text(x-small, 400, $color);
+        }
+
+        div {
+          height: 5px;
+          width: 50px;
+          background-color: $bg-color;
+          border-radius: 2px;
+
+          @include media_sm {
+            width: 75px;
+          }
+
+          @include media_md {
+            width: 100px;
+          }
+
+          @include media_lg {
+            width: 125px;
+          }
+        }
+      }
+    }
+  }
+}

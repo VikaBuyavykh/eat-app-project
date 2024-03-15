@@ -1,0 +1,94 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+
+li {
+  width: 85%;
+  margin-block: 12px;
+  height: fit-content;
+  border-radius: 15px;
+  @include flex(column, start, center, 5px);
+  position: relative;
+  cursor: pointer;
+
+  &:hover div[id="bg"] {
+    box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  &:hover div {
+    transform: translateY(-1.5px);
+  }
+
+  h3 {
+    @include text(md, 500, $color);
+  }
+
+  div[id="bg"] {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    border-radius: 15px;
+    box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    transition: box-shadow 0.5s ease;
+  }
+
+  div {
+    width: 95%;
+    @include flex(column, start, center, 10px);
+    z-index: 2;
+    transition: transform 0.2s ease-out;
+
+    img[id="img"] {
+      @include circle(75%);
+      margin-bottom: 5px;
+      box-shadow: 0px 5px 15px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    p {
+      @include text(small, 400, $color);
+      width: 100px;
+      text-align: center;
+      @extend %ellipsis;
+
+      @include media_sm {
+        width: 125px;
+      }
+
+      @include media_md {
+        width: 150px;
+      }
+
+      @include media_lg {
+        width: 175px;
+      }
+    }
+
+    div {
+      margin-bottom: 12px;
+      @include flex(row, space-between, center, 10px);
+
+      b {
+        @include text(large, 500, $bg-color);
+      }
+
+      button {
+        @include circle(30px);
+        background-color: $bg-color;
+        border: none;
+        @include flex(column, center, center, 0px);
+        transition: transform 0.5s ease;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+
+        img[id="button"] {
+          width: 20px;
+          object-fit: contain;
+          object-position: center;
+        }
+      }
+    }
+  }
+}

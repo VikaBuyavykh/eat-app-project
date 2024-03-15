@@ -1,0 +1,34 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+
+.app {
+  width: 100%;
+  min-width: 270px;
+  height: 100vh;
+  background-color: $bg-color;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  box-sizing: border-box;
+
+  &__content {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    @include flex(column, space-between, stretch, 1px);
+
+    &_info {
+      height: 100%;
+      @include flex(column, start, center, 10px);
+    }
+  }
+}
+
+// &:hover {
+//   cursor: pointer;
+//   color: darken($color, 10%);
+// }
+// &:active {
+//   color: darken($color, 20%);
+// }
+
+//background-color: transparentize(#a66a6a69, 0.1);
