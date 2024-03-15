@@ -1,4 +1,4 @@
-//import "./Card.css";
+import "./Card.css";
 import binImgPath from "../../images/bin-white.png";
 
 function Card({ imgPath, title, text, ccals }) {
