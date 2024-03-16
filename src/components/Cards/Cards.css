@@ -8,7 +8,7 @@
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
-.cards ul {
+.cards__list {
   width: 98%;
   height: 100%;
   overflow-y: scroll;
@@ -24,19 +24,19 @@
   list-style-type: none;
 }
 @media screen and (min-width: 480px) {
-  .cards ul {
+  .cards__list {
     -ms-grid-columns: (1fr)[3];
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media screen and (min-width: 768px) {
-  .cards ul {
+  .cards__list {
     -ms-grid-columns: (1fr)[4];
     grid-template-columns: repeat(4, 1fr);
   }
 }
 @media screen and (min-width: 992px) {
-  .cards ul {
+  .cards__list {
     width: 972px;
   }
 }

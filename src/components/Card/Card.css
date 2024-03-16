@@ -1,10 +1,10 @@
-li div p {
+.card__content-text {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-li {
+.card {
   width: 85%;
   margin-block: 12px;
   height: -webkit-fit-content;
@@ -28,35 +28,21 @@ li {
   position: relative;
   cursor: pointer;
 }
-li:hover div[id=bg] {
-  -webkit-box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.2);
-          box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.2);
+.card:hover .card__bg {
+  -webkit-box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.3);
+          box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.3);
 }
-li:hover div {
-  -webkit-transform: translateY(-1.5px);
-          transform: translateY(-1.5px);
+.card:hover .card__content {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
 }
-li h3 {
+.card__title {
   margin: 0;
   font-size: md;
   font-weight: 500;
   color: #a66a6a;
 }
-li div[id=bg] {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 80%;
-  border-radius: 15px;
-  -webkit-box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.1);
-          box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  -webkit-transition: -webkit-box-shadow 0.5s ease;
-  transition: -webkit-box-shadow 0.5s ease;
-  transition: box-shadow 0.5s ease;
-  transition: box-shadow 0.5s ease, -webkit-box-shadow 0.5s ease;
-}
-li div {
+.card__content {
   width: 95%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -78,7 +64,7 @@ li div {
   transition: transform 0.2s ease-out;
   transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
 }
-li div img[id=img] {
+.card__content-card {
   height: 75%;
   width: 75%;
   border-radius: 50%;
@@ -86,7 +72,7 @@ li div img[id=img] {
   -webkit-box-shadow: 0px 5px 15px 3px rgba(0, 0, 0, 0.2);
           box-shadow: 0px 5px 15px 3px rgba(0, 0, 0, 0.2);
 }
-li div p {
+.card__content-text {
   margin: 0;
   font-size: small;
   font-weight: 400;
@@ -95,22 +81,23 @@ li div p {
   text-align: center;
 }
 @media screen and (min-width: 480px) {
-  li div p {
+  .card__content-text {
     width: 125px;
   }
 }
 @media screen and (min-width: 768px) {
-  li div p {
+  .card__content-text {
     width: 150px;
   }
 }
 @media screen and (min-width: 992px) {
-  li div p {
+  .card__content-text {
     width: 175px;
   }
 }
-li div div {
+.card__content-btn-section {
   margin-bottom: 12px;
+  width: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -124,17 +111,27 @@ li div div {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 10px;
+  gap: 3px;
 }
-li div div b {
+.card__content-btn-section b {
   margin: 0;
-  font-size: large;
+  font-size: small;
   font-weight: 500;
   color: rgba(166, 106, 106, 0.3019607843);
 }
-li div div button {
-  height: 30px;
-  width: 30px;
+@media screen and (min-width: 310px) {
+  .card__content-btn-section b {
+    font-size: medium;
+  }
+}
+@media screen and (min-width: 768px) {
+  .card__content-btn-section b {
+    font-size: large;
+  }
+}
+.card__content-btn-section button {
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
   background-color: rgba(166, 106, 106, 0.3019607843);
   border: none;
@@ -158,14 +155,47 @@ li div div button {
   transition: transform 0.5s ease, -webkit-transform 0.5s ease;
   cursor: pointer;
 }
-li div div button:hover {
+@media screen and (min-width: 310px) {
+  .card__content-btn-section button {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+  }
+}
+@media screen and (min-width: 480px) {
+  .card__content-btn-section button {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  }
+}
+.card__content-btn-section button:hover {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }
-li div div button img[id=button] {
-  width: 20px;
+.card__content-btn-section button img[id=button] {
+  width: 15px;
   -o-object-fit: contain;
      object-fit: contain;
   -o-object-position: center;
      object-position: center;
+}
+@media screen and (min-width: 480px) {
+  .card__content-btn-section button img[id=button] {
+    width: 20px;
+  }
+}
+.card__bg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80%;
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  -webkit-transition: -webkit-box-shadow 0.5s ease;
+  transition: -webkit-box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease, -webkit-box-shadow 0.5s ease;
 }

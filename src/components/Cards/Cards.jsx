@@ -8,7 +8,7 @@ import dinnerImgPath from "../../images/dinner.jpg";
 function Cards() {
   return (
     <section className="cards">
-      <ul>
+      <ul className="cards__list">
         <Card
           imgPath={breakfastImgPath}
           title="Завтрак"
