@@ -1,0 +1,137 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+
+.meal-form {
+  width: 100%;
+  height: 92%;
+  @include flex(column, start, stretch, 35px);
+
+  &__title {
+    @include text(x-large, 500, $color);
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  &__graphics {
+    margin: 0 auto;
+    padding: 0;
+    @include flex(row, space-between, center, 5px);
+
+    @include media_xs {
+      width: 88%;
+    }
+
+    &-item {
+      @include flex(column, start, center, 10px);
+
+      &-circle {
+        @include circle(30px);
+        border: 3px solid ivory;
+        @include flex(column, center, center, 0px);
+
+        @include media_xs {
+          @include circle(40px);
+        }
+
+        @include media_sm {
+          @include circle(50px);
+        }
+
+        p {
+          @include text(x-small, 500, $color);
+        }
+      }
+
+      span {
+        @include text(x-small, 400, $color);
+      }
+    }
+  }
+
+  &__meals {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    @include flex(column, start, center, 10px);
+
+    &-item {
+      padding: 5px;
+      width: 95%;
+      border-radius: 35px;
+      background-color: $bg-color;
+      @include flex(row, space-between, center, 2px);
+      cursor: pointer;
+
+      @include media_md {
+        &:hover {
+          div[id="img-block"] div[id="overlay"] {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+
+      div[id="img-block"] {
+        @include circle(50px);
+
+        position: relative;
+
+        img[id="product"] {
+          @include circle(50px);
+          @include img(cover);
+        }
+
+        div[id="overlay"] {
+          visibility: visible;
+          opacity: 1;
+          position: absolute;
+          inset: 0;
+          @include circle(50px);
+          background-color: rgba(#000000, 0.3);
+          @include flex(column, center, center, 0px);
+          transition: opacity 0.5s ease, visibility 0.5s ease;
+
+          @include media_md {
+            visibility: hidden;
+            opacity: 0;
+          }
+
+          img[id="bin"] {
+            width: 25px;
+          }
+        }
+      }
+
+      p,
+      span {
+        @include text(x-small, 500, ivory);
+
+        @include media_xs {
+          font-size: small;
+        }
+
+        @include media_sm {
+          font-size: smaller;
+        }
+      }
+
+      p {
+        max-width: 100px;
+
+        @include media_xs {
+          max-width: 60%;
+        }
+
+        @include media_sm {
+          max-width: 70%;
+        }
+      }
+
+      span {
+        margin-right: 10px;
+      }
+    }
+  }
+}

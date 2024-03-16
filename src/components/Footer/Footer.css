@@ -66,6 +66,9 @@
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }
+.footer__menu_item_active span {
+  text-decoration: underline;
+}
 .footer__menu_item img {
   width: 30px;
 }

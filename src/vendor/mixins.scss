@@ -51,6 +51,11 @@
   border-radius: 50%;
 }
 
+@mixin img($fit) {
+  object-fit: $fit;
+  object-position: center;
+}
+
 %link {
   text-decoration: none;
   color: $color;

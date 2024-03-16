@@ -1,9 +1,16 @@
 import "./Header.css";
 
-function Header() {
+function Header({ currentPage }) {
   return (
     <>
-      <h1 className="header">Мой дневник</h1>
+      <h1 className="header">
+        Мой{" "}
+        {currentPage === "main"
+          ? "дневник"
+          : currentPage === "progress"
+          ? "прогресс"
+          : "профиль"}
+      </h1>
     </>
   );
 }

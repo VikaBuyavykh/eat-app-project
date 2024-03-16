@@ -1,44 +1,24 @@
 import "./Cards.css";
 import Card from "../Card/Card";
-import breakfastImgPath from "../../images/breakfast.jpg";
-import supperImgPath from "../../images/supper.jpg";
-import lunchImgPath from "../../images/lunch.jpg";
-import dinnerImgPath from "../../images/dinner.jpg";
 
-function Cards() {
+function Cards({ cards, ccalsList, handlePopupClick, setSelectedMealId }) {
   return (
     <section className="cards">
       <ul className="cards__list">
-        <Card
-          imgPath={breakfastImgPath}
-          title="Завтрак"
-          text="Каша овсяная"
-          ccals="269 ккал"
-        />
-        <Card
-          imgPath={supperImgPath}
-          title="Перекус"
-          text="Яблоко"
-          ccals="89 ккал"
-        />
-        <Card
-          imgPath={lunchImgPath}
-          title="Обед"
-          text="Борщ куриный"
-          ccals="286 ккал"
-        />
-        <Card
-          imgPath={supperImgPath}
-          title="Перекус"
-          text="Яйцо вареное"
-          ccals="101 ккал"
-        />
-        <Card
-          imgPath={dinnerImgPath}
-          title="Ужин"
-          text="Курица отварная, рис"
-          ccals="333 ккал"
-        />
+        {cards.map((card) => (
+          <Card
+            setSelectedMealId={setSelectedMealId}
+            handlePopupClick={handlePopupClick}
+            id={card.id}
+            key={card.id}
+            imgPath={card.imagePath}
+            title={card.title}
+            text={card.text}
+            grams={card.grams}
+            ccalsList={ccalsList}
+          />
+        ))}
+        <Card isFunctionalCard handlePopupClick={handlePopupClick} />
       </ul>
     </section>
   );

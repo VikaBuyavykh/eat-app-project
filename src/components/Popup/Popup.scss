@@ -1,0 +1,78 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+
+.popup {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(grey, 0.3);
+  @include flex(column, center, center, 0px);
+  z-index: 3;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+
+  &_visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__box {
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
+    background-color: Linen;
+    @include flex(column, center, center, 0px);
+
+    @include media_sm {
+      max-width: 384px;
+    }
+  }
+
+  &__content {
+    height: 95%;
+    width: 90%;
+    @include flex(column, space-between, start, 10px);
+
+    &-btn-group {
+      width: 100%;
+      @include flex(row, space-between, center, 10px);
+
+      button[type="button"] {
+        height: 42px;
+        width: 42px;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+
+        img {
+          height: 100%;
+          transform: rotate(180deg);
+          @include img(contain);
+        }
+      }
+
+      button[type="submit"] {
+        background-color: $color;
+        padding-inline: 30px;
+        padding-block: 10px;
+        border: none;
+        border-radius: 20px;
+        @include text(medium, 400, ivory);
+        transition: transform 0.5s ease;
+        cursor: pointer;
+
+        &:disabled {
+          background-color: transparentize(grey, 0.5);
+          cursor: default;
+          transform: none;
+        }
+      }
+
+      button:hover {
+        transform: scale(1.15);
+      }
+    }
+  }
+}
