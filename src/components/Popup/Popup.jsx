@@ -26,12 +26,13 @@ function Popup({
               selectedMealId={selectedMealId}
               cards={cards}
               ccalsList={ccalsList}
+              isPopupVisible={isPopupVisible}
             />
             <div className="popup__content-btn-group">
               <button onClick={handlePopupClick} type="button">
                 <img src={arrowImgPath} alt="Иконка стрелки назад" />
               </button>
-              <button type="submit">Добавить</button>
+              <button type="submit">Сохранить</button>
             </div>
           </div>
         </div>

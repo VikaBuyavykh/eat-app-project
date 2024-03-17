@@ -18,7 +18,11 @@ function Cards({ cards, ccalsList, handlePopupClick, setSelectedMealId }) {
             ccalsList={ccalsList}
           />
         ))}
-        <Card isFunctionalCard handlePopupClick={handlePopupClick} />
+        <Card
+          isFunctionalCard
+          handlePopupClick={handlePopupClick}
+          setSelectedMealId={setSelectedMealId}
+        />
       </ul>
     </section>
   );

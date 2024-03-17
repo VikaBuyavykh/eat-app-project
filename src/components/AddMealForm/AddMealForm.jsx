@@ -3,16 +3,15 @@ import MainContext from "../../utils/MainContext";
 import "./AddMealForm.css";
 import binImgPath from "../../images/x-white.png";
 
-function AddMealForm({ selectedMealId, cards, ccalsList }) {
+function AddMealForm({ selectedMealId, cards, ccalsList, isPopupVisible }) {
   const { CCALS_PER_DAY, PROT_PER_DAY, FAT_PER_DAY, CARBS_PER_DAY } =
     useContext(MainContext);
 
+  const [products, setProducts] = useState([]);
   const [mealProt, setMealProt] = useState(0);
   const [mealFat, setMealFat] = useState(0);
   const [mealCarbs, setMealCarbs] = useState(0);
   const [mealCcals, setMealCcals] = useState(0);
-
-  const [products, setProducts] = useState([]);
 
   function calc(meal, prop) {
     if (meal && prop) {
@@ -25,6 +24,15 @@ function AddMealForm({ selectedMealId, cards, ccalsList }) {
     }
   }
 
+  function handleSelectChange(e) {
+    Array.from(e.target.options).forEach((option) =>
+      option.value === e.target.value
+        ? option.setAttribute("selected", "selected")
+        : option.removeAttribute("selected")
+    );
+    console.log(e.target);
+  }
+
   useEffect(() => {
     const meal = cards.find((card) => card.id === selectedMealId);
     if (meal) {
@@ -35,12 +43,36 @@ function AddMealForm({ selectedMealId, cards, ccalsList }) {
         setMealFat(Math.round((calc(meal, "fat") * 100) / FAT_PER_DAY));
         setMealCarbs(Math.round((calc(meal, "carbs") * 100) / CARBS_PER_DAY));
       }
+      const g = Array.from(document.mealForm.title.options);
+      isPopupVisible
+        ? g
+            .find((item) => item.text === meal.title)
+            .setAttribute("selected", "selected")
+        : g.forEach((item) => item.removeAttribute("selected"));
+      console.log(document.mealForm.title);
     }
-  }, [selectedMealId]);
+    if (!isPopupVisible) {
+      setProducts([]);
+      setMealProt(0);
+      setMealFat(0);
+      setMealCarbs(0);
+      setMealCcals(0);
+    }
+  }, [isPopupVisible]);
 
   return (
-    <form name="meal-form" className="meal-form">
-      <h3 className="meal-form__title">Завтрак</h3>
+    <form name="mealForm" className="meal-form">
+      <select
+        name="title"
+        id="title"
+        className="meal-form__title"
+        onChange={handleSelectChange}
+      >
+        <option value="breakfast">Завтрак</option>
+        <option value="lunch">Обед</option>
+        <option value="dinner">Ужин</option>
+        <option value="snack">Перекус</option>
+      </select>
       <ul className="meal-form__graphics">
         <li className="meal-form__graphics-item">
           <div className="meal-form__graphics-item-circle">
