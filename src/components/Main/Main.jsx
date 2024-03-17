@@ -7,7 +7,7 @@ import Popup from "../Popup/Popup";
 
 function Main({ setCurrentPage }) {
   //ccals
-  const CCALS_PER_DAY = 1100;
+  const CCALS_PER_DAY = 1400;
   //prot
   const PROT_PROPORTION = 26;
   const PROT_CCALS_OF_A_GRAM = 4;
@@ -50,35 +50,36 @@ function Main({ setCurrentPage }) {
   };
 
   ///hardcode
-  let dd = date.getDate() - 1;
+  let dd = date.getDate() - 2;
 
   if (dd < 10) dd = "0" + dd;
   let mm = date.getMonth() + 1;
   if (mm < 10) mm = "0" + mm;
   const yyyy = date.getFullYear();
 
+  function handlePopupClick() {
+    isPopupVisible ? setIsPopupVisible(false) : setIsPopupVisible(true);
+  }
+
   function calc(meals) {
-    const ccalsArr = [];
-    const protArr = [];
-    const fatArr = [];
-    const carbsArr = [];
-    meals.forEach((meal) => {
-      const mealInfo = ccalsList.find((prod) => prod.name === meal.text);
+    function calculateProperty(prop) {
+      return meals
+        .map((meal) => {
+          const gramsArr = meal.products.map((prod) => prod.grams);
+          return meal.products
+            .map((prod) => prod.text)
+            .map((text) => ccalsList.find((prod) => prod.name === text))
+            .map((prod, index) => (prod[prop] * gramsArr[index]) / 100)
+            .reduce((a, b) => a + b, 0);
+        })
+        .reduce((a, b) => a + b, 0)
+        .toFixed(1);
+    }
 
-      const ccals = mealInfo.ccals;
-      const prot = mealInfo.prot;
-      const fat = mealInfo.fat;
-      const carbs = mealInfo.carbs;
-
-      ccalsArr.push(Math.round((meal.grams * ccals) / 100));
-      protArr.push((meal.grams * prot) / 100);
-      fatArr.push((meal.grams * fat) / 100);
-      carbsArr.push((meal.grams * carbs) / 100);
-    });
-    setCcals(ccalsArr.reduce((a, b) => a + b, 0));
-    setProt(protArr.reduce((a, b) => a + b, 0).toFixed(1));
-    setFat(fatArr.reduce((a, b) => a + b, 0).toFixed(1));
-    setCarbs(carbsArr.reduce((a, b) => a + b, 0).toFixed(1));
+    setCcals(calculateProperty("ccals"));
+    setProt(calculateProperty("prot"));
+    setFat(calculateProperty("fat"));
+    setCarbs(calculateProperty("carbs"));
   }
 
   async function getCards() {
@@ -93,10 +94,6 @@ function Main({ setCurrentPage }) {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  function handlePopupClick() {
-    isPopupVisible ? setIsPopupVisible(false) : setIsPopupVisible(true);
   }
 
   async function getCcalsList() {

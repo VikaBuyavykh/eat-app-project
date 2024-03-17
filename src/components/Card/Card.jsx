@@ -6,7 +6,7 @@ function Card({
   id,
   imgPath,
   title,
-  text,
+  texts,
   grams,
   isFunctionalCard,
   handlePopupClick,
@@ -35,15 +35,20 @@ function Card({
         />
         {!isFunctionalCard ? (
           <>
-            <p className="card__content-text">{text}</p>
+            <p className="card__content-text">{texts.join(", ")}</p>
             <div className="card__content-btn-section">
               <b>
-                {ccalsList.length > 0 && text
-                  ? Math.round(
-                      (ccalsList.find((prod) => prod.name === text).ccals *
-                        grams) /
-                        100
-                    ) + " ккал"
+                {ccalsList.length > 0 && texts.length > 0
+                  ? texts
+                      .map((text, index) => {
+                        return (
+                          (ccalsList.find((prod) => prod.name === text).ccals *
+                            grams[index]) /
+                          100
+                        );
+                      })
+                      .reduce((a, b) => a + b, 0)
+                      .toFixed(1) + " ккал"
                   : ""}
               </b>
               <button type="button">

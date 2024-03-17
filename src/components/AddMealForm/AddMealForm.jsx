@@ -7,27 +7,34 @@ function AddMealForm({ selectedMealId, cards, ccalsList }) {
   const { CCALS_PER_DAY, PROT_PER_DAY, FAT_PER_DAY, CARBS_PER_DAY } =
     useContext(MainContext);
 
-  const [mealImg, setMealImg] = useState("");
-  const [mealText, setMealText] = useState("");
-  const [mealGrams, setMealGrams] = useState(null);
   const [mealProt, setMealProt] = useState(0);
   const [mealFat, setMealFat] = useState(0);
   const [mealCarbs, setMealCarbs] = useState(0);
   const [mealCcals, setMealCcals] = useState(0);
 
+  const [products, setProducts] = useState([]);
+
+  function calc(meal, prop) {
+    if (meal && prop) {
+      return meal.products
+        .map((prod) => {
+          const productInfo = ccalsList.find((item) => item.name === prod.text);
+          return (productInfo[prop] * prod.grams) / 100;
+        })
+        .reduce((a, b) => a + b, 0);
+    }
+  }
+
   useEffect(() => {
     const meal = cards.find((card) => card.id === selectedMealId);
     if (meal) {
-      setMealImg(meal.imagePath);
-      setMealText(meal.text);
-      setMealGrams(meal.grams);
-    }
-    if (meal && ccalsList) {
-      const mealInfo = ccalsList.find((prod) => prod.name === meal.text);
-      setMealProt(Math.round((mealInfo.prot * meal.grams) / PROT_PER_DAY));
-      setMealFat(Math.round((mealInfo.fat * meal.grams) / FAT_PER_DAY));
-      setMealCarbs(Math.round((mealInfo.carbs * meal.grams) / CARBS_PER_DAY));
-      setMealCcals(Math.round((mealInfo.ccals * meal.grams) / 100));
+      setProducts(meal.products);
+      if (ccalsList) {
+        setMealCcals(Math.round(calc(meal, "ccals")));
+        setMealProt(Math.round((calc(meal, "prot") * 100) / PROT_PER_DAY));
+        setMealFat(Math.round((calc(meal, "fat") * 100) / FAT_PER_DAY));
+        setMealCarbs(Math.round((calc(meal, "carbs") * 100) / CARBS_PER_DAY));
+      }
     }
   }, [selectedMealId]);
 
@@ -61,16 +68,22 @@ function AddMealForm({ selectedMealId, cards, ccalsList }) {
         </li>
       </ul>
       <ul className="meal-form__meals">
-        <li className="meal-form__meals-item">
-          <div id="img-block">
-            <img id="product" src={mealImg} alt="Картинка продукта" />
-            <div id="overlay">
-              <img id="bin" src={binImgPath} alt="Иконка удаления продукта" />
+        {products.map((product) => (
+          <li key={product.id} className="meal-form__meals-item">
+            <div id="img-block">
+              <img
+                id="product"
+                src={product.imagePath}
+                alt="Картинка продукта"
+              />
+              <div id="overlay">
+                <img id="bin" src={binImgPath} alt="Иконка удаления продукта" />
+              </div>
             </div>
-          </div>
-          <p>{mealText}</p>
-          <span>{mealGrams} г</span>
-        </li>
+            <p>{product.text}</p>
+            <span>{product.grams} г</span>
+          </li>
+        ))}
       </ul>
     </form>
   );

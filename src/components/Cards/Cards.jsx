@@ -11,10 +11,10 @@ function Cards({ cards, ccalsList, handlePopupClick, setSelectedMealId }) {
             handlePopupClick={handlePopupClick}
             id={card.id}
             key={card.id}
-            imgPath={card.imagePath}
+            imgPath={card.products[0].imagePath}
             title={card.title}
-            text={card.text}
-            grams={card.grams}
+            texts={card.products.map((product) => product.text)}
+            grams={card.products.map((product) => product.grams)}
             ccalsList={ccalsList}
           />
         ))}
