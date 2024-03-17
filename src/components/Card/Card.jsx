@@ -38,11 +38,13 @@ function Card({
             <p className="card__content-text">{text}</p>
             <div className="card__content-btn-section">
               <b>
-                {Math.round(
-                  (ccalsList.find((prod) => prod.name === text).ccals * grams) /
-                    100
-                )}{" "}
-                ккал
+                {ccalsList.length > 0 && text
+                  ? Math.round(
+                      (ccalsList.find((prod) => prod.name === text).ccals *
+                        grams) /
+                        100
+                    ) + " ккал"
+                  : ""}
               </b>
               <button type="button">
                 <img id="button" src={binImgPath} alt="Иконка удаления" />

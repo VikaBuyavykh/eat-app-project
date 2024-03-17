@@ -3,7 +3,13 @@ import "../AddMealForm/AddMealForm";
 import AddMealForm from "../AddMealForm/AddMealForm";
 import arrowImgPath from "../../images/arrow.png";
 
-function Popup({ handlePopupClick, isPopupVisible, selectedMealId, cards }) {
+function Popup({
+  handlePopupClick,
+  isPopupVisible,
+  selectedMealId,
+  cards,
+  ccalsList,
+}) {
   function handlePopupClose(e) {
     e.target === e.currentTarget && handlePopupClick();
   }
@@ -16,7 +22,11 @@ function Popup({ handlePopupClick, isPopupVisible, selectedMealId, cards }) {
       >
         <div className="popup__box">
           <div className="popup__content">
-            <AddMealForm selectedMealId={selectedMealId} cards={cards} />
+            <AddMealForm
+              selectedMealId={selectedMealId}
+              cards={cards}
+              ccalsList={ccalsList}
+            />
             <div className="popup__content-btn-group">
               <button onClick={handlePopupClick} type="button">
                 <img src={arrowImgPath} alt="Иконка стрелки назад" />
