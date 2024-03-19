@@ -1,0 +1,123 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+
+.product-form {
+  margin: 0 auto;
+  width: 95%;
+  height: 92%;
+  overflow: hidden;
+  @include flex(column, start, stretch, 25px);
+
+  &__title {
+    @include text(x-large, 500, $bg-color);
+    margin-top: 13px;
+  }
+
+  &__form {
+    width: 100%;
+    height: 75%;
+    @include flex(column, start, center, 20px);
+
+    @media screen and (min-height: 400px) {
+      height: 77%;
+    }
+
+    @media screen and (min-height: 400px) {
+      height: 83%;
+    }
+
+    @media screen and (min-height: 660px) {
+      height: 87%;
+    }
+
+    @media screen and (min-height: 800px) {
+      height: 90%;
+    }
+
+    @media screen and (min-height: 1000px) {
+      height: 92%;
+    }
+
+    &-search {
+      width: 90%;
+      height: 25px;
+
+      border: 1px solid $bg-color;
+      border-radius: 20px;
+      @include flex(row, start, center, 10px);
+
+      input[type="search"] {
+        width: 100%;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        @include text(smaller, 400, $color);
+
+        &::placeholder {
+          @include text(smaller, 400, $bg-color);
+        }
+
+        &::-webkit-search-cancel-button {
+          display: none;
+        }
+      }
+      img {
+        padding-left: 10px;
+        height: 10px;
+        width: 10px;
+      }
+    }
+
+    &-list {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      @include flex(column, start, center, 15px);
+      overflow-y: scroll;
+
+      &-item {
+        width: 95%;
+        padding-inline: 6px;
+        padding-block: 5px;
+        border-radius: 20px;
+        background-color: ivory;
+        @include flex(row, space-between, center, 10px);
+        cursor: pointer;
+        transition: transform 0.2 ease;
+
+        &:hover {
+          box-shadow: 0px 0px 5px rgba(black, 0.3);
+        }
+
+        &_active {
+          border: 1px solid $color;
+        }
+
+        img {
+          @include circle(30px);
+          @include img(cover);
+        }
+
+        div {
+          width: 80%;
+          padding-left: 7px;
+          @include flex(column, start, flex-start, 1px);
+
+          p {
+            width: 100%;
+            @extend %ellipsis;
+            @include text(small, 400, $color);
+            text-align: left;
+
+            &:last-of-type {
+              font-size: xx-small;
+              color: transparentize(grey, 0.4);
+            }
+          }
+        }
+      }
+    }
+  }
+}

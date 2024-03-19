@@ -38,13 +38,18 @@
       @include flex(row, space-between, center, 10px);
 
       button[type="button"] {
-        height: 42px;
-        width: 42px;
+        height: 35px;
+        width: 35px;
         padding: 0;
         background-color: transparent;
         border: none;
         cursor: pointer;
         transition: transform 0.5s ease;
+
+        @include media_xs {
+          height: 42px;
+          width: 42px;
+        }
 
         img {
           height: 100%;
@@ -55,13 +60,18 @@
 
       button[type="submit"] {
         background-color: $color;
-        padding-inline: 30px;
-        padding-block: 10px;
+        padding-inline: 25px;
+        padding-block: 7px;
         border: none;
         border-radius: 20px;
         @include text(medium, 400, ivory);
         transition: transform 0.5s ease;
         cursor: pointer;
+
+        @include media_xs {
+          padding-inline: 30px;
+          padding-block: 10px;
+        }
 
         &:disabled {
           background-color: transparentize(grey, 0.5);

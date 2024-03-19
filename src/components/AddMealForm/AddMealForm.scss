@@ -7,19 +7,23 @@
   @include flex(column, start, stretch, 35px);
 
   &__title {
-    width: 60%;
-    height: 50px;
-    border-radius: 30px;
-    outline: none;
-    border: 1.5px solid $bg-color;
-    background-color: transparent;
     @include text(x-large, 500, $bg-color);
-    margin-top: 10px;
-    padding: 0 0 2px 10px;
+    margin-top: 13px;
 
-    option {
-      text-align: left;
-      @include text(small, 400, $color);
+    &_select {
+      width: 60%;
+      height: 50px;
+      border-radius: 30px;
+      outline: none;
+      border: 1.5px solid $bg-color;
+      background-color: transparent;
+      margin-top: 10px;
+      padding: 0 0 2px 10px;
+
+      option {
+        text-align: left;
+        @include text(small, 400, $color);
+      }
     }
   }
 

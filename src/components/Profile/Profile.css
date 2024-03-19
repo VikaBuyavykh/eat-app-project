@@ -1,0 +1,88 @@
+.profile {
+  width: 95%;
+  max-width: 500px;
+  margin: 30px auto 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  gap: 10px;
+}
+.profile__input-group {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0px;
+  padding-block: 5px 16px;
+  border-bottom: 1px solid rgba(166, 106, 106, 0.3019607843);
+}
+.profile__input-group:last-of-type {
+  border-bottom: none;
+}
+.profile__input-group label {
+  margin: 0;
+  font-size: medium;
+  font-weight: 400;
+  color: #a66a6a;
+}
+.profile__input-group input {
+  margin: 0;
+  font-size: medium;
+  font-weight: 400;
+  color: ivory;
+  text-align: right;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.profile__btn {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  max-width: 250px;
+  padding: 7px 30px;
+  background-color: rgba(166, 106, 106, 0.3019607843);
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  margin: 0;
+  font-size: medium;
+  font-weight: 500;
+  color: ivory;
+  margin-top: 10px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.5s ease;
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+}
+.profile__btn:hover {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
+}
+.profile__btn:disabled {
+  cursor: default;
+  -webkit-transform: none;
+          transform: none;
+  border: none;
+  background-color: rgba(128, 128, 128, 0.5);
+}

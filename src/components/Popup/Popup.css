@@ -87,8 +87,8 @@
   gap: 10px;
 }
 .popup__content-btn-group button[type=button] {
-  height: 42px;
-  width: 42px;
+  height: 35px;
+  width: 35px;
   padding: 0;
   background-color: transparent;
   border: none;
@@ -97,6 +97,12 @@
   transition: -webkit-transform 0.5s ease;
   transition: transform 0.5s ease;
   transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+}
+@media screen and (min-width: 310px) {
+  .popup__content-btn-group button[type=button] {
+    height: 42px;
+    width: 42px;
+  }
 }
 .popup__content-btn-group button[type=button] img {
   height: 100%;
@@ -109,8 +115,8 @@
 }
 .popup__content-btn-group button[type=submit] {
   background-color: #a66a6a;
-  padding-inline: 30px;
-  padding-block: 10px;
+  padding-inline: 25px;
+  padding-block: 7px;
   border: none;
   border-radius: 20px;
   margin: 0;
@@ -122,6 +128,12 @@
   transition: transform 0.5s ease;
   transition: transform 0.5s ease, -webkit-transform 0.5s ease;
   cursor: pointer;
+}
+@media screen and (min-width: 310px) {
+  .popup__content-btn-group button[type=submit] {
+    padding-inline: 30px;
+    padding-block: 10px;
+  }
 }
 .popup__content-btn-group button[type=submit]:disabled {
   background-color: rgba(128, 128, 128, 0.5);

@@ -17,20 +17,23 @@
   gap: 35px;
 }
 .meal-form__title {
+  margin: 0;
+  font-size: x-large;
+  font-weight: 500;
+  color: rgba(166, 106, 106, 0.3019607843);
+  margin-top: 13px;
+}
+.meal-form__title_select {
   width: 60%;
   height: 50px;
   border-radius: 30px;
   outline: none;
   border: 1.5px solid rgba(166, 106, 106, 0.3019607843);
   background-color: transparent;
-  margin: 0;
-  font-size: x-large;
-  font-weight: 500;
-  color: rgba(166, 106, 106, 0.3019607843);
   margin-top: 10px;
   padding: 0 0 2px 10px;
 }
-.meal-form__title option {
+.meal-form__title_select option {
   text-align: left;
   margin: 0;
   font-size: small;
