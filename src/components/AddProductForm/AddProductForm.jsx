@@ -1,7 +1,12 @@
 import "./AddProductForm.css";
 import loupeImgPath from "../../images/loupe.png";
 
-function AddProductForm({ handleChooseClick, mealTitle, list }) {
+function AddProductForm({
+  handleSearchQuery,
+  handleChooseClick,
+  mealTitle,
+  list,
+}) {
   return (
     <>
       <div className="product-form">
@@ -10,6 +15,7 @@ function AddProductForm({ handleChooseClick, mealTitle, list }) {
           <div className="product-form__form-search">
             <img src={loupeImgPath} alt="Иконка лупы" />
             <input
+              onInput={handleSearchQuery}
               type="search"
               name="search"
               id="search"

@@ -26,6 +26,7 @@ function Popup({
   const [isAddingAProduct, setIsAddingAProduct] = useState(false);
   const [selectedProdId, setSelectedProdId] = useState(null);
   const [list, setList] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   function handlePopupClose(e) {
     e.target === e.currentTarget && handlePopupClick();
@@ -53,7 +54,6 @@ function Popup({
     setProducts(
       products.filter((product) => product.id !== Number(idToDelete))
     );
-    console.log(idToDelete);
   }
 
   function calc(meal, prop) {
@@ -77,6 +77,27 @@ function Popup({
     setSelectedProdId(e.currentTarget.id);
   }
 
+  function handleSearchQuery(e) {
+    setSearchQuery(e.target.value);
+  }
+
+  function filterById() {
+    const prodsIds = products.map((prod) => prod.id);
+    return ccalsList.filter((item) => !prodsIds.includes(item.id));
+  }
+
+  function filterByName() {
+    setList(
+      filterById().filter((item) =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  }
+
+  useEffect(() => {
+    filterByName();
+  }, [searchQuery]);
+
   useEffect(() => {
     if (selectedProdId && !isAddingAProduct) {
       const elem = ccalsList.find((item) => item.id === Number(selectedProdId));
@@ -91,8 +112,7 @@ function Popup({
       ]);
     }
     if (isAddingAProduct) {
-      const prodsIds = products.map((prod) => prod.id);
-      setList(ccalsList.filter((item) => !prodsIds.includes(item.id)));
+      setList(filterById());
     }
   }, [isAddingAProduct]);
 
@@ -157,6 +177,7 @@ function Popup({
                 list={list}
                 mealTitle={mealTitle}
                 handleChooseClick={handleChooseClick}
+                handleSearchQuery={handleSearchQuery}
               />
             )}
             <div className="popup__content-btn-group">
