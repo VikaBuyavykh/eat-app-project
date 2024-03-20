@@ -103,10 +103,15 @@ function Popup({
         ? card
         : { ...card, products: products }
     );
-    await axios.patch(`https://5a5adfe6f3c47fd1.mokky.dev/days/${dateId}`, {
-      meals: newCards,
-    });
-    setCards(newCards);
+    try {
+      await axios.patch(`https://5a5adfe6f3c47fd1.mokky.dev/days/${dateId}`, {
+        meals: newCards,
+      });
+      setCards(newCards);
+      handlePopupClick();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
