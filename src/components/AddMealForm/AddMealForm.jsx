@@ -10,9 +10,15 @@ function AddMealForm({
   mealCarbs,
   products,
   handleDeleteClick,
+  handleMealFormSbmt,
 }) {
   return (
-    <form name="mealForm" className="meal-form">
+    <form
+      name="meal"
+      id="meal"
+      onSubmit={handleMealFormSbmt}
+      className="meal-form"
+    >
       {isFunctional ? (
         <select
           name="title"

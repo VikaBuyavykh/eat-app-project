@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import MainContext from "../../utils/MainContext";
 import "./Popup.css";
 import "../AddMealForm/AddMealForm";
@@ -6,13 +7,14 @@ import AddMealForm from "../AddMealForm/AddMealForm";
 import AddProductForm from "../AddProductForm/AddProductForm";
 import arrowImgPath from "../../images/arrow.png";
 import plusImgPath from "../../images/plus.png";
-
 function Popup({
   handlePopupClick,
   isPopupVisible,
   selectedMealId,
   cards,
+  setCards,
   ccalsList,
+  dateId,
 }) {
   const { PROT_PER_DAY, FAT_PER_DAY, CARBS_PER_DAY } = useContext(MainContext);
 
@@ -58,7 +60,7 @@ function Popup({
 
   function calc(meal, prop) {
     if (meal && prop) {
-      return meal.products
+      return meal
         .map((prod) => {
           const productInfo = ccalsList.find((item) => item.name === prod.text);
           return (productInfo[prop] * prod.grams) / 100;
@@ -68,11 +70,11 @@ function Popup({
   }
 
   function handleChooseClick(e) {
-    Array.from(
-      document.querySelectorAll(".product-form__form-list-item_active")
-    ).forEach((item) =>
-      item.classList.remove("product-form__form-list-item_active")
+    const selectedElem = document.querySelector(
+      ".product-form__form-list-item_active"
     );
+    selectedElem &&
+      selectedElem.classList.remove("product-form__form-list-item_active");
     e.currentTarget.classList.add("product-form__form-list-item_active");
     setSelectedProdId(e.currentTarget.id);
   }
@@ -92,6 +94,19 @@ function Popup({
         item.name.toLowerCase().includes(searchQuery.toLowerCase())
       )
     );
+  }
+
+  async function handleMealFormSbmt(e) {
+    e.preventDefault();
+    const newCards = cards.map((card) =>
+      card.id !== Number(selectedMealId)
+        ? card
+        : { ...card, products: products }
+    );
+    await axios.patch(`https://5a5adfe6f3c47fd1.mokky.dev/days/${dateId}`, {
+      meals: newCards,
+    });
+    setCards(newCards);
   }
 
   useEffect(() => {
@@ -134,24 +149,21 @@ function Popup({
       const meal = cards.find((card) => card.id === selectedMealId);
       if (meal) {
         setMealTitle(meal.title);
-        setProducts(meal.products);
         if (ccalsList) {
-          setProducts(
-            meal.products.map((prod) => {
-              const elemId = ccalsList.find(
-                (item) => item.name === prod.text
-              ).id;
-              return { ...prod, id: elemId };
-            })
-          );
-          setMealCcals(Math.round(calc(meal, "ccals")));
-          setMealProt(Math.round((calc(meal, "prot") * 100) / PROT_PER_DAY));
-          setMealFat(Math.round((calc(meal, "fat") * 100) / FAT_PER_DAY));
-          setMealCarbs(Math.round((calc(meal, "carbs") * 100) / CARBS_PER_DAY));
+          setProducts(meal.products);
         }
       }
     }
   }, [isPopupVisible]);
+
+  useEffect(() => {
+    if (products.length > 0) {
+      setMealCcals(Math.round(calc(products, "ccals")));
+      setMealProt(Math.round((calc(products, "prot") * 100) / PROT_PER_DAY));
+      setMealFat(Math.round((calc(products, "fat") * 100) / FAT_PER_DAY));
+      setMealCarbs(Math.round((calc(products, "carbs") * 100) / CARBS_PER_DAY));
+    }
+  }, [products]);
 
   return (
     <>
@@ -171,6 +183,7 @@ function Popup({
                 mealCarbs={mealCarbs}
                 products={products}
                 handleDeleteClick={handleDeleteClick}
+                handleMealFormSbmt={handleMealFormSbmt}
               />
             ) : (
               <AddProductForm
@@ -181,13 +194,36 @@ function Popup({
               />
             )}
             <div className="popup__content-btn-group">
-              <button onClick={handleBackClick} type="button">
+              <button
+                onClick={handleBackClick}
+                type="button"
+                className="popup__content-btn-group_btn"
+              >
                 <img src={arrowImgPath} alt="Иконка стрелки назад" />
               </button>
-              <button onClick={handleAddClick} type="submit">
-                {isAddingAProduct ? "Добавить" : "Сохранить"}
-              </button>
-              <button onClick={handlePlusClick} type="button">
+              {isAddingAProduct && (
+                <button
+                  onClick={handleAddClick}
+                  type="button"
+                  className="popup__content-btn-group_sbmt"
+                >
+                  Добавить
+                </button>
+              )}
+              {!isAddingAProduct && (
+                <button
+                  form="meal"
+                  type="submit"
+                  className="popup__content-btn-group_sbmt"
+                >
+                  Сохранить
+                </button>
+              )}
+              <button
+                onClick={handlePlusClick}
+                type="button"
+                className="popup__content-btn-group_btn"
+              >
                 <img src={plusImgPath} alt="Иконка добавления продукта" />
               </button>
             </div>

@@ -37,7 +37,7 @@
       width: 100%;
       @include flex(row, space-between, center, 10px);
 
-      button[type="button"] {
+      &_btn {
         height: 35px;
         width: 35px;
         padding: 0;
@@ -58,11 +58,12 @@
         }
       }
 
-      button[type="submit"] {
+      &_sbmt {
         background-color: $color;
         padding-inline: 25px;
         padding-block: 7px;
         border: none;
+        outline: none;
         border-radius: 20px;
         @include text(medium, 400, ivory);
         transition: transform 0.5s ease;

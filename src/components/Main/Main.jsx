@@ -41,6 +41,7 @@ function Main({ setCurrentPage }) {
   const [prot, setProt] = useState(0);
   const [fat, setFat] = useState(0);
   const [carbs, setCarbs] = useState(0);
+  const [dateId, setDateId] = useState(null);
 
   const date = new Date();
   const options = {
@@ -87,10 +88,9 @@ function Main({ setCurrentPage }) {
       const { data } = await axios.get(
         "https://5a5adfe6f3c47fd1.mokky.dev/days"
       );
-      const dateMeals = data.find(
-        (day) => day.day === `${dd}.${mm}.${yyyy}`
-      ).meals;
-      setCards(dateMeals);
+      const dateMeals = data.find((day) => day.day === `${dd}.${mm}.${yyyy}`);
+      setDateId(dateMeals.id);
+      setCards(dateMeals.meals);
     } catch (error) {
       console.log(error);
     }
@@ -168,7 +168,9 @@ function Main({ setCurrentPage }) {
           isPopupVisible={isPopupVisible}
           selectedMealId={selectedMealId}
           cards={cards}
+          setCards={setCards}
           ccalsList={ccalsList}
+          dateId={dateId}
         />
       </MainContext.Provider>
     </main>
