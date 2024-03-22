@@ -24,10 +24,10 @@ function Popup({
   const { PROT_PER_DAY, FAT_PER_DAY, CARBS_PER_DAY } = useContext(MainContext);
   const { values, handleChange, setValues } = UseForm({
     text: "",
-    ccals: 0,
-    prot: 0,
-    fat: 0,
-    carbs: 0,
+    ccals: "",
+    prot: "",
+    fat: "",
+    carbs: "",
     url: "",
   });
 
@@ -44,7 +44,8 @@ function Popup({
   const [list, setList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [select, setSelect] = useState("breakfast");
-  const [isSbmtBtnDisabled, setIsSmbtBtnDisabled] = useState(true);
+  const [isSbmtBtnDisabled, setIsSbmtBtnDisabled] = useState(true);
+  const [isSbmtCreationDisabled, setIsSbmtCreationDisabled] = useState(true);
   const [isAddBtnDisabled, setIsAddBtnDisabled] = useState(true);
 
   function handlePopupClose(e) {
@@ -123,6 +124,13 @@ function Popup({
 
   function handleSelect(e) {
     setSelect(e.target.value);
+  }
+
+  function onCreationFormInput(e) {
+    const hasNoEmptyInput = Array.from(
+      e.currentTarget.querySelectorAll("input")
+    ).every((item) => item.value !== "");
+    setIsSbmtCreationDisabled(!hasNoEmptyInput);
   }
 
   async function handleFormSbmt(e) {
@@ -232,11 +240,10 @@ function Popup({
     setMealProt(Math.round((calc(products, "prot") * 100) / PROT_PER_DAY));
     setMealFat(Math.round((calc(products, "fat") * 100) / FAT_PER_DAY));
     setMealCarbs(Math.round((calc(products, "carbs") * 100) / CARBS_PER_DAY));
-
     if (products.length > 0) {
-      setIsSmbtBtnDisabled(false);
+      setIsSbmtBtnDisabled(false);
     } else {
-      setIsSmbtBtnDisabled(true);
+      setIsSbmtBtnDisabled(true);
     }
   }, [products]);
 
@@ -245,8 +252,17 @@ function Popup({
   }, [selectedProdId]);
 
   useEffect(() => {
-    !isCreatingAProduct &&
-      setValues({ text: "", ccals: 0, prot: 0, fat: 0, carbs: 0, url: "" });
+    if (!isCreatingAProduct) {
+      setValues({
+        text: "",
+        ccals: "",
+        prot: "",
+        fat: "",
+        carbs: "",
+        url: "",
+      });
+      setIsSbmtCreationDisabled(true);
+    }
   }, [isCreatingAProduct]);
 
   return (
@@ -284,6 +300,7 @@ function Popup({
                 values={values}
                 handleChange={handleChange}
                 handleFormSbmt={handleFormSbmt}
+                onCreationFormInput={onCreationFormInput}
               />
             )}
             <div className="popup__content-btn-group">
@@ -309,7 +326,11 @@ function Popup({
                   form={!isCreatingAProduct ? "meal" : "creation"}
                   type="submit"
                   className="popup__content-btn-group_sbmt"
-                  disabled={isSbmtBtnDisabled}
+                  disabled={
+                    !isCreatingAProduct
+                      ? isSbmtBtnDisabled
+                      : isSbmtCreationDisabled
+                  }
                 >
                   Сохранить
                 </button>

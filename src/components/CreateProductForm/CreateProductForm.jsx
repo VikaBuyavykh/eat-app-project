@@ -4,11 +4,13 @@ export default function CreateProductForm({
   values,
   handleChange,
   handleFormSbmt,
+  onCreationFormInput,
 }) {
   return (
     <>
       <form
         onSubmit={handleFormSbmt}
+        onInput={onCreationFormInput}
         name="creation"
         id="creation"
         className="creation"

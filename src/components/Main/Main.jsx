@@ -50,7 +50,7 @@ function Main({ setCurrentPage }) {
   };
 
   ///hardcode
-  let dd = date.getDate() - 7;
+  let dd = date.getDate() - 8;
 
   if (dd < 10) dd = "0" + dd;
   let mm = date.getMonth() + 1;
