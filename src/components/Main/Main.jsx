@@ -41,7 +41,6 @@ function Main({ setCurrentPage }) {
   const [prot, setProt] = useState(0);
   const [fat, setFat] = useState(0);
   const [carbs, setCarbs] = useState(0);
-  const [dateId, setDateId] = useState(null);
 
   const date = new Date();
   const options = {
@@ -51,15 +50,30 @@ function Main({ setCurrentPage }) {
   };
 
   ///hardcode
-  let dd = date.getDate() - 5;
+  let dd = date.getDate() - 7;
 
   if (dd < 10) dd = "0" + dd;
   let mm = date.getMonth() + 1;
   if (mm < 10) mm = "0" + mm;
   const yyyy = date.getFullYear();
+  const ddmmyyyy = `${dd}.${mm}.${yyyy}`;
 
   function handlePopupClick() {
     isPopupVisible ? setIsPopupVisible(false) : setIsPopupVisible(true);
+  }
+
+  async function handleMealDelete(e) {
+    const idToDelete = e.currentTarget.closest(".card").id;
+    try {
+      await axios.delete(
+        `https://5a5adfe6f3c47fd1.mokky.dev/days/${idToDelete}`
+      );
+      setCards(
+        cards.filter((card) => (card.id !== Number(idToDelete) ? card : ""))
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function calc(meals) {
@@ -76,8 +90,7 @@ function Main({ setCurrentPage }) {
         .reduce((a, b) => a + b, 0)
         .toFixed(1);
     }
-
-    setCcals(calculateProperty("ccals"));
+    setCcals(Math.round(calculateProperty("ccals")));
     setProt(calculateProperty("prot"));
     setFat(calculateProperty("fat"));
     setCarbs(calculateProperty("carbs"));
@@ -88,9 +101,8 @@ function Main({ setCurrentPage }) {
       const { data } = await axios.get(
         "https://5a5adfe6f3c47fd1.mokky.dev/days"
       );
-      const dateMeals = data.find((day) => day.day === `${dd}.${mm}.${yyyy}`);
-      setDateId(dateMeals.id);
-      setCards(dateMeals.meals);
+      const dateMeals = data.filter((day) => day.day === ddmmyyyy);
+      setCards(dateMeals);
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +129,7 @@ function Main({ setCurrentPage }) {
     if (ccalsList.length > 0 && cards.length > 0) {
       calc(cards);
     }
-  }, [ccalsList]);
+  }, [cards]);
 
   return (
     <main className="main">
@@ -159,6 +171,7 @@ function Main({ setCurrentPage }) {
         date={date}
         handlePopupClick={handlePopupClick}
         setSelectedMealId={setSelectedMealId}
+        handleMealDelete={handleMealDelete}
       />
       <MainContext.Provider
         value={{ CCALS_PER_DAY, PROT_PER_DAY, FAT_PER_DAY, CARBS_PER_DAY }}
@@ -170,7 +183,9 @@ function Main({ setCurrentPage }) {
           cards={cards}
           setCards={setCards}
           ccalsList={ccalsList}
-          dateId={dateId}
+          ddmmyyyy={ddmmyyyy}
+          getCards={getCards}
+          getCcalsList={getCcalsList}
         />
       </MainContext.Provider>
     </main>

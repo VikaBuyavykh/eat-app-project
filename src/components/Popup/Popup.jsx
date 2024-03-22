@@ -5,8 +5,11 @@ import "./Popup.css";
 import "../AddMealForm/AddMealForm";
 import AddMealForm from "../AddMealForm/AddMealForm";
 import AddProductForm from "../AddProductForm/AddProductForm";
+import CreateProductForm from "../CreateProductForm/CreateProductForm";
+import UseForm from "../../utils/UseForm";
 import arrowImgPath from "../../images/arrow.png";
 import plusImgPath from "../../images/plus.png";
+
 function Popup({
   handlePopupClick,
   isPopupVisible,
@@ -14,9 +17,19 @@ function Popup({
   cards,
   setCards,
   ccalsList,
-  dateId,
+  ddmmyyyy,
+  getCards,
+  getCcalsList,
 }) {
   const { PROT_PER_DAY, FAT_PER_DAY, CARBS_PER_DAY } = useContext(MainContext);
+  const { values, handleChange, setValues } = UseForm({
+    text: "",
+    ccals: 0,
+    prot: 0,
+    fat: 0,
+    carbs: 0,
+    url: "",
+  });
 
   const [products, setProducts] = useState([]);
   const [mealProt, setMealProt] = useState(0);
@@ -26,17 +39,24 @@ function Popup({
   const [mealTitle, setMealTitle] = useState("");
   const [isFunctional, setIsFunctional] = useState(false);
   const [isAddingAProduct, setIsAddingAProduct] = useState(false);
+  const [isCreatingAProduct, setIsCreatingAProduct] = useState(false);
   const [selectedProdId, setSelectedProdId] = useState(null);
   const [list, setList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [select, setSelect] = useState("breakfast");
+  const [isSbmtBtnDisabled, setIsSmbtBtnDisabled] = useState(true);
+  const [isAddBtnDisabled, setIsAddBtnDisabled] = useState(true);
 
   function handlePopupClose(e) {
     e.target === e.currentTarget && handlePopupClick();
   }
 
   function handleBackClick() {
-    if (!isAddingAProduct) {
+    if (!isAddingAProduct && !isCreatingAProduct) {
       handlePopupClick();
+    } else if (isCreatingAProduct) {
+      setIsCreatingAProduct(false);
+      setIsAddingAProduct(true);
     } else {
       setIsAddingAProduct(false);
       setSelectedProdId(null);
@@ -44,15 +64,20 @@ function Popup({
   }
 
   function handlePlusClick() {
-    setIsAddingAProduct(true);
+    if (!isAddingAProduct) {
+      setIsAddingAProduct(true);
+    } else {
+      setIsAddingAProduct(false);
+      setIsCreatingAProduct(true);
+    }
   }
 
   function handleAddClick() {
     isAddingAProduct && setIsAddingAProduct(false);
   }
 
-  function handleDeleteClick(e) {
-    const idToDelete = e.currentTarget.closest(".meal-form__meals-item").id;
+  function handleProductDelete(e) {
+    const idToDelete = e.currentTarget.closest(".product").id;
     setProducts(
       products.filter((product) => product.id !== Number(idToDelete))
     );
@@ -96,19 +121,54 @@ function Popup({
     );
   }
 
-  async function handleMealFormSbmt(e) {
+  function handleSelect(e) {
+    setSelect(e.target.value);
+  }
+
+  async function handleFormSbmt(e) {
     e.preventDefault();
-    const newCards = cards.map((card) =>
-      card.id !== Number(selectedMealId)
-        ? card
-        : { ...card, products: products }
-    );
     try {
-      await axios.patch(`https://5a5adfe6f3c47fd1.mokky.dev/days/${dateId}`, {
-        meals: newCards,
-      });
-      setCards(newCards);
-      handlePopupClick();
+      if (!isCreatingAProduct) {
+        if (isFunctional) {
+          await axios.post(`https://5a5adfe6f3c47fd1.mokky.dev/days`, {
+            day: ddmmyyyy,
+            title:
+              select === "breakfast"
+                ? "Завтрак"
+                : select === "lunch"
+                ? "Обед"
+                : select === "dinner"
+                ? "Ужин"
+                : "Перекус",
+            products: products,
+          });
+          getCards();
+        } else {
+          await axios.patch(
+            `https://5a5adfe6f3c47fd1.mokky.dev/days/${selectedMealId}`,
+            { products: products }
+          );
+          setCards(
+            cards.map((card) =>
+              card.id !== Number(selectedMealId)
+                ? card
+                : { ...card, products: products }
+            )
+          );
+        }
+        handlePopupClick();
+      } else {
+        await axios.post("https://5a5adfe6f3c47fd1.mokky.dev/products", {
+          name: values.text,
+          ccals: values.ccals,
+          prot: values.prot,
+          fat: values.fat,
+          carbs: values.carbs,
+          img: values.url,
+        });
+        getCcalsList();
+        handleBackClick();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -117,6 +177,10 @@ function Popup({
   useEffect(() => {
     filterByName();
   }, [searchQuery]);
+
+  useEffect(() => {
+    setList(filterById());
+  }, [ccalsList]);
 
   useEffect(() => {
     if (selectedProdId && !isAddingAProduct) {
@@ -147,7 +211,9 @@ function Popup({
         setMealTitle("");
         setIsFunctional(false);
         setIsAddingAProduct(false);
+        setIsCreatingAProduct(false);
         setSelectedProdId(null);
+        setSelect("breakfast");
       }, 500);
     } else {
       selectedMealId === undefined && setIsFunctional(true);
@@ -162,13 +228,26 @@ function Popup({
   }, [isPopupVisible]);
 
   useEffect(() => {
+    setMealCcals(Math.round(calc(products, "ccals")));
+    setMealProt(Math.round((calc(products, "prot") * 100) / PROT_PER_DAY));
+    setMealFat(Math.round((calc(products, "fat") * 100) / FAT_PER_DAY));
+    setMealCarbs(Math.round((calc(products, "carbs") * 100) / CARBS_PER_DAY));
+
     if (products.length > 0) {
-      setMealCcals(Math.round(calc(products, "ccals")));
-      setMealProt(Math.round((calc(products, "prot") * 100) / PROT_PER_DAY));
-      setMealFat(Math.round((calc(products, "fat") * 100) / FAT_PER_DAY));
-      setMealCarbs(Math.round((calc(products, "carbs") * 100) / CARBS_PER_DAY));
+      setIsSmbtBtnDisabled(false);
+    } else {
+      setIsSmbtBtnDisabled(true);
     }
   }, [products]);
+
+  useEffect(() => {
+    selectedProdId ? setIsAddBtnDisabled(false) : setIsAddBtnDisabled(true);
+  }, [selectedProdId]);
+
+  useEffect(() => {
+    !isCreatingAProduct &&
+      setValues({ text: "", ccals: 0, prot: 0, fat: 0, carbs: 0, url: "" });
+  }, [isCreatingAProduct]);
 
   return (
     <>
@@ -178,7 +257,7 @@ function Popup({
       >
         <div className="popup__box">
           <div className="popup__content">
-            {!isAddingAProduct ? (
+            {!isAddingAProduct && !isCreatingAProduct ? (
               <AddMealForm
                 isFunctional={isFunctional}
                 mealTitle={mealTitle}
@@ -187,15 +266,24 @@ function Popup({
                 mealFat={mealFat}
                 mealCarbs={mealCarbs}
                 products={products}
-                handleDeleteClick={handleDeleteClick}
-                handleMealFormSbmt={handleMealFormSbmt}
+                setProducts={setProducts}
+                handleProductDelete={handleProductDelete}
+                handleFormSbmt={handleFormSbmt}
+                handleSelect={handleSelect}
+                select={select}
               />
-            ) : (
+            ) : isAddingAProduct ? (
               <AddProductForm
                 list={list}
                 mealTitle={mealTitle}
                 handleChooseClick={handleChooseClick}
                 handleSearchQuery={handleSearchQuery}
+              />
+            ) : (
+              <CreateProductForm
+                values={values}
+                handleChange={handleChange}
+                handleFormSbmt={handleFormSbmt}
               />
             )}
             <div className="popup__content-btn-group">
@@ -211,26 +299,30 @@ function Popup({
                   onClick={handleAddClick}
                   type="button"
                   className="popup__content-btn-group_sbmt"
+                  disabled={isAddBtnDisabled}
                 >
                   Добавить
                 </button>
               )}
               {!isAddingAProduct && (
                 <button
-                  form="meal"
+                  form={!isCreatingAProduct ? "meal" : "creation"}
                   type="submit"
                   className="popup__content-btn-group_sbmt"
+                  disabled={isSbmtBtnDisabled}
                 >
                   Сохранить
                 </button>
               )}
-              <button
-                onClick={handlePlusClick}
-                type="button"
-                className="popup__content-btn-group_btn"
-              >
-                <img src={plusImgPath} alt="Иконка добавления продукта" />
-              </button>
+              {!isCreatingAProduct && (
+                <button
+                  onClick={handlePlusClick}
+                  type="button"
+                  className="popup__content-btn-group_btn"
+                >
+                  <img src={plusImgPath} alt="Иконка добавления продукта" />
+                </button>
+              )}
             </div>
           </div>
         </div>

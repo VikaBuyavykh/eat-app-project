@@ -1,12 +1,19 @@
 import "./Cards.css";
 import Card from "../Card/Card";
 
-function Cards({ cards, ccalsList, handlePopupClick, setSelectedMealId }) {
+function Cards({
+  cards,
+  ccalsList,
+  handlePopupClick,
+  setSelectedMealId,
+  handleMealDelete,
+}) {
   return (
     <section className="cards">
       <ul className="cards__list">
         {cards.map((card) => (
           <Card
+            handleMealDelete={handleMealDelete}
             setSelectedMealId={setSelectedMealId}
             handlePopupClick={handlePopupClick}
             id={card.id}

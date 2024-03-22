@@ -22,22 +22,26 @@ function AddProductForm({
               placeholder="Поиск по продуктам"
             />
           </div>
-          <ul className="product-form__form-list">
-            {list.map((prod) => (
-              <li
-                onClick={handleChooseClick}
-                key={prod.id}
-                id={prod.id}
-                className="product-form__form-list-item"
-              >
-                <div>
-                  <p>{prod.name}</p>
-                  <p>{prod.ccals} ккал</p>
-                </div>
-                <img src={prod.img} alt={prod.name} />
-              </li>
-            ))}
-          </ul>
+          {list.length > 0 ? (
+            <ul className="product-form__form-list">
+              {list.map((prod) => (
+                <li
+                  onClick={handleChooseClick}
+                  key={prod.id}
+                  id={prod.id}
+                  className="product-form__form-list-item"
+                >
+                  <div>
+                    <p>{prod.name}</p>
+                    <p>{prod.ccals} ккал</p>
+                  </div>
+                  <img src={prod.img} alt={prod.name} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="product-form__form-text">Ничего не найдено</p>
+          )}
         </form>
       </div>
     </>

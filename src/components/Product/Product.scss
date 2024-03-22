@@ -1,0 +1,94 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+
+.product {
+  padding: 5px;
+  width: 95%;
+  border-radius: 35px;
+  background-color: $bg-color;
+  @include flex(row, space-between, center, 2px);
+  cursor: pointer;
+
+  @include media_md {
+    &:hover {
+      div[id="img"] div[id="overlay"] {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__img-block {
+    @include circle(50px);
+    position: relative;
+
+    &_img {
+      @include circle(50px);
+      @include img(cover);
+    }
+
+    &_overlay {
+      visibility: visible;
+      opacity: 1;
+      position: absolute;
+      inset: 0;
+      @include circle(50px);
+      background-color: rgba(#000000, 0.3);
+      @include flex(column, center, center, 0px);
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+
+      @include media_md {
+        visibility: hidden;
+        opacity: 0;
+      }
+
+      img {
+        width: 25px;
+      }
+    }
+  }
+
+  &__text {
+    @include text(x-small, 500, ivory);
+    max-width: 100px;
+
+    @include media_xs {
+      font-size: small;
+      max-width: 60%;
+    }
+
+    @include media_sm {
+      font-size: smaller;
+      max-width: 70%;
+    }
+  }
+
+  &__input-block {
+    @include flex(row, end, center, 0px);
+    @include text(x-small, 500, ivory);
+    margin-right: 10px;
+
+    @include media_xs {
+      font-size: small;
+    }
+
+    @include media_sm {
+      font-size: smaller;
+    }
+
+    input {
+      color: ivory;
+      text-align: right;
+      width: 25px;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      -moz-appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+    }
+  }
+}

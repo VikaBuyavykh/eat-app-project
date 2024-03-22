@@ -1,5 +1,5 @@
 import "./AddMealForm.css";
-import binImgPath from "../../images/x-white.png";
+import Product from "../Product/Product";
 
 function AddMealForm({
   isFunctional,
@@ -9,21 +9,21 @@ function AddMealForm({
   mealFat,
   mealCarbs,
   products,
-  handleDeleteClick,
-  handleMealFormSbmt,
+  setProducts,
+  handleProductDelete,
+  handleFormSbmt,
+  handleSelect,
+  select,
 }) {
   return (
-    <form
-      name="meal"
-      id="meal"
-      onSubmit={handleMealFormSbmt}
-      className="meal-form"
-    >
+    <form name="meal" id="meal" onSubmit={handleFormSbmt} className="meal-form">
       {isFunctional ? (
         <select
           name="title"
           id="title"
           className="meal-form__title meal-form__title_select"
+          onChange={handleSelect}
+          value={select}
         >
           <option value="breakfast">Завтрак</option>
           <option value="lunch">Обед</option>
@@ -59,28 +59,24 @@ function AddMealForm({
           <span>Углеводы</span>
         </li>
       </ul>
-      <ul className="meal-form__meals">
-        {products.map((product) => (
-          <li
-            key={product.id}
-            id={product.id}
-            className="meal-form__meals-item"
-          >
-            <div id="img-block">
-              <img
-                id="product"
-                src={product.imagePath}
-                alt="Картинка продукта"
-              />
-              <div onClick={handleDeleteClick} id="overlay">
-                <img id="bin" src={binImgPath} alt="Иконка удаления продукта" />
-              </div>
-            </div>
-            <p>{product.text}</p>
-            <span>{product.grams} г</span>
-          </li>
-        ))}
-      </ul>
+      {products.length > 0 ? (
+        <ul className="meal-form__meals">
+          {products.map((product) => (
+            <Product
+              key={product.id}
+              id={product.id}
+              imagePath={product.imagePath}
+              grams={product.grams}
+              handleProductDelete={handleProductDelete}
+              text={product.text}
+              products={products}
+              setProducts={setProducts}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p className="meal-form__text">Добавьте продукты</p>
+      )}
     </form>
   );
 }

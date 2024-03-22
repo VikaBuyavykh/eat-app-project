@@ -1,0 +1,139 @@
+.product {
+  padding: 5px;
+  width: 95%;
+  border-radius: 35px;
+  background-color: rgba(166, 106, 106, 0.3019607843);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2px;
+  cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+  .product:hover div[id=img] div[id=overlay] {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.product__img-block {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  position: relative;
+}
+.product__img-block_img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.product__img-block_overlay {
+  visibility: visible;
+  opacity: 1;
+  position: absolute;
+  inset: 0;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0px;
+  -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+@media screen and (min-width: 768px) {
+  .product__img-block_overlay {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+.product__img-block_overlay img {
+  width: 25px;
+}
+.product__text {
+  margin: 0;
+  font-size: x-small;
+  font-weight: 500;
+  color: ivory;
+  max-width: 100px;
+}
+@media screen and (min-width: 310px) {
+  .product__text {
+    font-size: small;
+    max-width: 60%;
+  }
+}
+@media screen and (min-width: 480px) {
+  .product__text {
+    font-size: smaller;
+    max-width: 70%;
+  }
+}
+.product__input-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0px;
+  margin: 0;
+  font-size: x-small;
+  font-weight: 500;
+  color: ivory;
+  margin-right: 10px;
+}
+@media screen and (min-width: 310px) {
+  .product__input-block {
+    font-size: small;
+  }
+}
+@media screen and (min-width: 480px) {
+  .product__input-block {
+    font-size: smaller;
+  }
+}
+.product__input-block input {
+  color: ivory;
+  text-align: right;
+  width: 25px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  -moz-appearance: textfield;
+}
+.product__input-block input::-webkit-outer-spin-button, .product__input-block input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

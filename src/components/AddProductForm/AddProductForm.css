@@ -236,3 +236,9 @@
   font-size: xx-small;
   color: rgba(128, 128, 128, 0.6);
 }
+.product-form__form-text {
+  margin: 0;
+  font-size: medium;
+  font-weight: 400;
+  color: rgba(166, 106, 106, 0.3019607843);
+}

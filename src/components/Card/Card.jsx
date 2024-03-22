@@ -12,14 +12,17 @@ function Card({
   handlePopupClick,
   setSelectedMealId,
   ccalsList,
+  handleMealDelete,
 }) {
-  function handleCardClick() {
-    handlePopupClick();
-    setSelectedMealId(id);
+  function handleCardClick(e) {
+    if (e.target.id !== "button") {
+      handlePopupClick();
+      setSelectedMealId(id);
+    }
   }
 
   return (
-    <li onClick={handleCardClick} className="card">
+    <li onClick={handleCardClick} id={id} className="card">
       <h3
         className={`card__title ${isFunctionalCard ? "card__title_func" : ""}`}
       >
@@ -51,7 +54,7 @@ function Card({
                       .toFixed(1) + " ккал"
                   : ""}
               </b>
-              <button type="button">
+              <button onClick={handleMealDelete} type="button">
                 <img id="button" src={binImgPath} alt="Иконка удаления" />
               </button>
             </div>

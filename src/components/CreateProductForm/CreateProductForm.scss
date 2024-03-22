@@ -1,0 +1,70 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+
+.creation {
+  width: 100%;
+  @include flex(column, start, center, 20px);
+
+  &__input-group,
+  &__inputs-group {
+    width: 100%;
+    padding: 7px;
+    border-radius: 30px;
+    background-color: ivory;
+    @include flex(column, start, center, 0px);
+  }
+
+  &__input-group {
+    label {
+      padding-bottom: 7px;
+      border-bottom: 1px solid $bg-color;
+      @include text(large, 500, $bg-color);
+    }
+
+    input {
+      padding-top: 7px;
+      @include text(medium, 400, $color);
+      background-color: transparent;
+      border: none;
+      outline: none;
+      width: 80%;
+      text-align: left;
+
+      &::placeholder {
+        @include text(medium, 500, transparentize(grey, 0.5));
+      }
+    }
+  }
+
+  &__inputs-group {
+    width: 100%;
+    &-text {
+      @include text(large, 500, $bg-color);
+      padding-bottom: 7px;
+      border-bottom: 1px solid $bg-color;
+    }
+
+    &-container {
+      padding-top: 7px;
+      @include flex(row, space-between, center, 5px);
+
+      &-item {
+        width: 65px;
+        @include flex(column, start, center, 5px);
+
+        label {
+          @include text(small, 500, transparentize(grey, 0.5));
+        }
+
+        input {
+          width: 90%;
+          border-radius: 10px;
+          border: 1px solid $bg-color;
+          @include text(medium, 400, $color);
+          background-color: transparent;
+          outline: none;
+        }
+      }
+    }
+  }
+}

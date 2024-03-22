@@ -98,6 +98,10 @@
   transition: transform 0.5s ease;
   transition: transform 0.5s ease, -webkit-transform 0.5s ease;
 }
+.popup__content-btn-group_btn:hover {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
+}
 @media screen and (min-width: 310px) {
   .popup__content-btn-group_btn {
     height: 42px;
@@ -130,6 +134,10 @@
   transition: transform 0.5s ease, -webkit-transform 0.5s ease;
   cursor: pointer;
 }
+.popup__content-btn-group_sbmt:hover {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
+}
 @media screen and (min-width: 310px) {
   .popup__content-btn-group_sbmt {
     padding-inline: 30px;
@@ -141,8 +149,4 @@
   cursor: default;
   -webkit-transform: none;
           transform: none;
-}
-.popup__content-btn-group button:hover {
-  -webkit-transform: scale(1.15);
-          transform: scale(1.15);
 }

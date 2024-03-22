@@ -119,5 +119,9 @@
         }
       }
     }
+
+    &-text {
+      @include text(medium, 400, $bg-color);
+    }
   }
 }

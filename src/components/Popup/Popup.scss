@@ -46,6 +46,10 @@
         cursor: pointer;
         transition: transform 0.5s ease;
 
+        &:hover {
+          transform: scale(1.15);
+        }
+
         @include media_xs {
           height: 42px;
           width: 42px;
@@ -69,6 +73,10 @@
         transition: transform 0.5s ease;
         cursor: pointer;
 
+        &:hover {
+          transform: scale(1.15);
+        }
+
         @include media_xs {
           padding-inline: 30px;
           padding-block: 10px;
@@ -79,10 +87,6 @@
           cursor: default;
           transform: none;
         }
-      }
-
-      button:hover {
-        transform: scale(1.15);
       }
     }
   }
