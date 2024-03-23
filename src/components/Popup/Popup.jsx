@@ -130,7 +130,12 @@ function Popup({
     const hasNoEmptyInput = Array.from(
       e.currentTarget.querySelectorAll("input")
     ).every((item) => item.value !== "");
-    setIsSbmtCreationDisabled(!hasNoEmptyInput);
+    const isFormInvalid = Array.from(
+      e.currentTarget.querySelectorAll("span")
+    ).some((error) => {
+      return error.textContent !== "";
+    });
+    setIsSbmtCreationDisabled(isFormInvalid || !hasNoEmptyInput);
   }
 
   async function handleFormSbmt(e) {

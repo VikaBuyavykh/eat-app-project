@@ -17,7 +17,8 @@
 }
 .creation__input-group, .creation__inputs-group {
   width: 100%;
-  padding: 7px;
+  padding-inline: 7px;
+  padding-block: 17px 3px;
   border-radius: 30px;
   background-color: ivory;
   display: -webkit-box;
@@ -34,6 +35,16 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 0px;
+}
+.creation__input-group span, .creation__inputs-group span {
+  width: 80%;
+  min-height: 10.35px;
+  margin: 0;
+  font-size: xx-small;
+  font-weight: 400;
+  color: red;
+  margin-top: 5px;
+  text-align: left;
 }
 .creation__input-group label {
   padding-bottom: 7px;

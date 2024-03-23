@@ -34,7 +34,13 @@ function Main({ setCurrentPage }) {
     100
   ).toFixed(1);
 
-  const { values, handleChange } = useForm({ date: new Date() });
+  const date = new Date();
+  const yyyy = date.getFullYear();
+  let mm = date.getMonth() + 1;
+  if (mm < 10) mm = "0" + mm;
+  let dd = date.getDate();
+  if (dd < 10) dd = "0" + dd;
+  const { values, handleChange } = useForm({ date: `${yyyy}-${mm}-${dd}` });
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [selectedMealId, setSelectedMealId] = useState(null);
@@ -120,7 +126,6 @@ function Main({ setCurrentPage }) {
 
   useEffect(() => {
     getCards();
-    console.log(values.date);
   }, [values]);
 
   return (

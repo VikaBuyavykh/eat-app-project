@@ -8,10 +8,19 @@
   &__input-group,
   &__inputs-group {
     width: 100%;
-    padding: 7px;
+    padding-inline: 7px;
+    padding-block: 17px 3px;
     border-radius: 30px;
     background-color: ivory;
     @include flex(column, start, center, 0px);
+
+    span {
+      width: 80%;
+      min-height: 10.35px;
+      @include text(xx-small, 400, red);
+      margin-top: 5px;
+      text-align: left;
+    }
   }
 
   &__input-group {
