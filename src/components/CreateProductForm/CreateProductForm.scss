@@ -18,20 +18,44 @@
     label {
       padding-bottom: 7px;
       border-bottom: 1px solid $bg-color;
-      @include text(large, 500, $bg-color);
+      @include text(small, 500, $bg-color);
+
+      @include media_xs {
+        font-size: medium;
+      }
+
+      @include media_sm {
+        font-size: large;
+      }
     }
 
     input {
       padding-top: 7px;
-      @include text(medium, 400, $color);
+      @include text(xx-small, 400, $color);
       background-color: transparent;
       border: none;
       outline: none;
       width: 80%;
       text-align: left;
 
+      @include media_xs {
+        font-size: small;
+      }
+
+      @include media_sm {
+        font-size: medium;
+      }
+
       &::placeholder {
-        @include text(medium, 500, transparentize(grey, 0.5));
+        @include text(xx-small, 400, transparentize(grey, 0.5));
+
+        @include media_xs {
+          font-size: small;
+        }
+
+        @include media_sm {
+          font-size: medium;
+        }
       }
     }
   }
@@ -39,9 +63,17 @@
   &__inputs-group {
     width: 100%;
     &-text {
-      @include text(large, 500, $bg-color);
+      @include text(small, 500, $bg-color);
       padding-bottom: 7px;
       border-bottom: 1px solid $bg-color;
+
+      @include media_xs {
+        font-size: medium;
+      }
+
+      @include media_sm {
+        font-size: large;
+      }
     }
 
     &-container {
@@ -49,20 +81,44 @@
       @include flex(row, space-between, center, 5px);
 
       &-item {
-        width: 65px;
+        width: 45px;
         @include flex(column, start, center, 5px);
 
+        @include media_xs {
+          width: 55px;
+        }
+
+        @include media_sm {
+          width: 65px;
+        }
+
         label {
-          @include text(small, 500, transparentize(grey, 0.5));
+          @include text(xx-small, 500, transparentize(grey, 0.5));
+
+          @include media_xs {
+            font-size: x-small;
+          }
+
+          @include media_sm {
+            font-size: small;
+          }
         }
 
         input {
           width: 90%;
           border-radius: 10px;
           border: 1px solid $bg-color;
-          @include text(medium, 400, $color);
+          @include text(x-small, 400, $color);
           background-color: transparent;
           outline: none;
+
+          @include media_xs {
+            font-size: small;
+          }
+
+          @include media_sm {
+            font-size: medium;
+          }
         }
       }
     }
