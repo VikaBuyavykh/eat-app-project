@@ -7,8 +7,20 @@
   height: 100%;
   @include flex(column, start, center, 10px);
 
-  &__data {
-    @include text(md, 500, ivory);
+  &__date {
+    @include text(medium, 400, ivory);
+    background-color: transparentize(grey, 0.85);
+    padding: 7px;
+    padding-left: 9px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+
+    &::-webkit-calendar-picker-indicator {
+      margin-right: 2px;
+      cursor: pointer;
+      filter: invert(1);
+    }
   }
 
   &__graphics-circle {

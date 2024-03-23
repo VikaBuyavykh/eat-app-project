@@ -17,11 +17,23 @@
           align-items: center;
   gap: 10px;
 }
-.main__data {
+.main__date {
   margin: 0;
-  font-size: md;
-  font-weight: 500;
+  font-size: medium;
+  font-weight: 400;
   color: ivory;
+  background-color: rgba(128, 128, 128, 0.15);
+  padding: 7px;
+  padding-left: 9px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+.main__date::-webkit-calendar-picker-indicator {
+  margin-right: 2px;
+  cursor: pointer;
+  -webkit-filter: invert(1);
+          filter: invert(1);
 }
 .main__graphics-circle {
   margin: 0;

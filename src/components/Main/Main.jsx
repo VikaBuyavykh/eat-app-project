@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MainContext from "../../utils/MainContext";
+import useForm from "../../utils/UseForm";
 import "./Main.css";
 import Cards from "../Cards/Cards";
 import Popup from "../Popup/Popup";
@@ -33,6 +34,8 @@ function Main({ setCurrentPage }) {
     100
   ).toFixed(1);
 
+  const { values, handleChange } = useForm({ date: new Date() });
+
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [selectedMealId, setSelectedMealId] = useState(null);
   const [cards, setCards] = useState([]);
@@ -41,22 +44,6 @@ function Main({ setCurrentPage }) {
   const [prot, setProt] = useState(0);
   const [fat, setFat] = useState(0);
   const [carbs, setCarbs] = useState(0);
-
-  const date = new Date();
-  const options = {
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-  };
-
-  ///hardcode
-  let dd = date.getDate() - 8;
-
-  if (dd < 10) dd = "0" + dd;
-  let mm = date.getMonth() + 1;
-  if (mm < 10) mm = "0" + mm;
-  const yyyy = date.getFullYear();
-  const ddmmyyyy = `${dd}.${mm}.${yyyy}`;
 
   function handlePopupClick() {
     isPopupVisible ? setIsPopupVisible(false) : setIsPopupVisible(true);
@@ -101,7 +88,7 @@ function Main({ setCurrentPage }) {
       const { data } = await axios.get(
         "https://5a5adfe6f3c47fd1.mokky.dev/days"
       );
-      const dateMeals = data.filter((day) => day.day === ddmmyyyy);
+      const dateMeals = data.filter((day) => day.day === values.date);
       setCards(dateMeals);
     } catch (error) {
       console.log(error);
@@ -131,9 +118,21 @@ function Main({ setCurrentPage }) {
     }
   }, [cards]);
 
+  useEffect(() => {
+    getCards();
+    console.log(values.date);
+  }, [values]);
+
   return (
     <main className="main">
-      <p className="main__data">{date.toLocaleString("ru", options)}</p>
+      <input
+        type="date"
+        name="date"
+        id="date"
+        onChange={handleChange}
+        value={values.date}
+        className="main__date"
+      />
       <section className="main__graphics">
         <div className="main__graphics-circle">
           <h2>{CCALS_PER_DAY - ccals >= 0 ? CCALS_PER_DAY - ccals : 0}</h2>
@@ -168,7 +167,6 @@ function Main({ setCurrentPage }) {
       <Cards
         cards={cards}
         ccalsList={ccalsList}
-        date={date}
         handlePopupClick={handlePopupClick}
         setSelectedMealId={setSelectedMealId}
         handleMealDelete={handleMealDelete}
@@ -183,7 +181,7 @@ function Main({ setCurrentPage }) {
           cards={cards}
           setCards={setCards}
           ccalsList={ccalsList}
-          ddmmyyyy={ddmmyyyy}
+          ddmmyyyy={values.date}
           getCards={getCards}
           getCcalsList={getCcalsList}
         />
