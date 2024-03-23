@@ -60,8 +60,8 @@ function Popup({
       setIsAddingAProduct(true);
     } else {
       setIsAddingAProduct(false);
-      setSelectedProdId(null);
     }
+    setSelectedProdId(null);
   }
 
   function handlePlusClick() {
