@@ -1,0 +1,133 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+%error {
+  min-height: 10.35px;
+  @include text(xx-small, 400, red);
+  margin-left: 10px;
+}
+
+.register {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90%;
+  max-width: 600px;
+  height: 90%;
+  max-height: 1000px;
+  padding-block: 40px;
+  padding-inline: 20px;
+  background-color: transparentize($color, 0.85);
+  border-radius: 15px;
+  @include flex(column, center, stretch, 20px);
+
+  &__img-group {
+    margin: 0 auto;
+    position: relative;
+    background: linear-gradient(rgba(ivory, 0.3), rgba(ivory, 0.05));
+    border-radius: 50%;
+
+    //@include flex(column, center, center, 0px);
+
+    &_like {
+      width: 30px;
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-15deg);
+    }
+
+    &_img {
+      width: 100%;
+      max-width: 225px;
+    }
+  }
+
+  &__text-block {
+    width: 90%;
+    @include flex(column, start, stretch, 20px);
+
+    h1 {
+      @include text(x-large, 500, $color);
+    }
+
+    b {
+      @include text(medium, 500, transparentize($color, 0.15));
+    }
+
+    p {
+      @include text(small, 400, transparentize(black, 0.3));
+    }
+  }
+
+  &__button {
+    background-color: $color;
+    width: 60%;
+    padding-block: 7px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    @include text(medium, 400, ivory);
+    margin-top: 20px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:disabled {
+      transform: none;
+      cursor: default;
+      background-color: transparentize(grey, 0.5);
+    }
+  }
+
+  &__form {
+    @include flex(column, start, stretch, 5px);
+
+    &-item {
+      @include flex(column, start, stretch, 3px);
+
+      label {
+        @include text(medium, 400, $color);
+        margin-left: 10px;
+      }
+
+      input {
+        box-sizing: border-box;
+        padding: 7px 15px;
+        border: none;
+        outline: none;
+        background-color: $bg-color;
+        border-radius: 20px;
+        @include text(small, 400, $color);
+
+        &::placeholder {
+          @include text(small, 400, transparentize(ivory, 0.5));
+        }
+      }
+
+      span {
+        @extend %error;
+      }
+    }
+
+    p[id="error-api"] {
+      @extend %error;
+    }
+  }
+
+  p[id="link"] {
+    @include text(x-small, 400, ivory);
+
+    a {
+      color: $color;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: darken($color, 15%);
+      }
+    }
+  }
+}

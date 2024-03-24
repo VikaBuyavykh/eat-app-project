@@ -6,7 +6,7 @@ import "./Main.css";
 import Cards from "../Cards/Cards";
 import Popup from "../Popup/Popup";
 
-function Main({ setCurrentPage }) {
+function Main({ setCurrentPage, isSbmtDisabled }) {
   //ccals
   const CCALS_PER_DAY = 1400;
   //prot
@@ -189,6 +189,7 @@ function Main({ setCurrentPage }) {
           ddmmyyyy={values.date}
           getCards={getCards}
           getCcalsList={getCcalsList}
+          isSbmtDisabled={isSbmtDisabled}
         />
       </MainContext.Provider>
     </main>

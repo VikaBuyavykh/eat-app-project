@@ -20,6 +20,7 @@ function Popup({
   ddmmyyyy,
   getCards,
   getCcalsList,
+  isSbmtDisabled,
 }) {
   const { PROT_PER_DAY, FAT_PER_DAY, CARBS_PER_DAY } = useContext(MainContext);
   const { values, handleChange, setValues } = UseForm({
@@ -127,15 +128,7 @@ function Popup({
   }
 
   function onCreationFormInput(e) {
-    const hasNoEmptyInput = Array.from(
-      e.currentTarget.querySelectorAll("input")
-    ).every((item) => item.value !== "");
-    const isFormInvalid = Array.from(
-      e.currentTarget.querySelectorAll("span")
-    ).some((error) => {
-      return error.textContent !== "";
-    });
-    setIsSbmtCreationDisabled(isFormInvalid || !hasNoEmptyInput);
+    setIsSbmtCreationDisabled(isSbmtDisabled(e));
   }
 
   async function handleFormSbmt(e) {
