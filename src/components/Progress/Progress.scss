@@ -1,0 +1,11 @@
+@import "../../vendor/mixins.scss";
+@import "../../vendor/variables.scss";
+
+.progress {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 75%;
+  @include text(large, 500, darken($bg-color, 40%));
+  text-align: center;
+}

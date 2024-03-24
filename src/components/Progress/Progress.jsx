@@ -6,7 +6,10 @@ function Progress({ setCurrentPage }) {
 
   return (
     <>
-      <h1>Прогресс</h1>
+      <h1 className="progress">
+        Здесь уже очень скоро будет прогресс — динамика сброса веса и история
+        записей
+      </h1>
     </>
   );
 }

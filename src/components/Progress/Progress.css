@@ -1,0 +1,12 @@
+.progress {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 75%;
+  margin: 0;
+  font-size: large;
+  font-weight: 500;
+  color: rgba(43, 25, 25, 0.3019607843);
+  text-align: center;
+}
