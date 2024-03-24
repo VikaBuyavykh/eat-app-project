@@ -58,6 +58,7 @@ function Profile({
     setCurrentUser({});
     setIsLoggedIn(false);
     navigate("/login");
+    localStorage.clear();
   }
 
   useEffect(() => setCurrentPage("profile"), []);

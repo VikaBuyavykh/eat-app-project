@@ -8,10 +8,15 @@ import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import ProtectedRouteElement from "../../utils/ProtectedRoute.jsx";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+  const [currentUser, setCurrentUser] = useState(
+    localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {}
+  );
   const [currentPage, setCurrentPage] = useState("main");
 
   function isSbmtDisabled(e) {
@@ -26,7 +31,10 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(currentUser);
+    if (currentUser.token) {
+      localStorage.setItem("token", currentUser.token);
+      localStorage.setItem("user", JSON.stringify(currentUser));
+    }
   }, [currentUser]);
 
   return (
@@ -59,25 +67,35 @@ function App() {
             <Route
               path="/"
               element={
-                <Main
+                <ProtectedRouteElement
+                  component={Main}
                   setCurrentPage={setCurrentPage}
                   isSbmtDisabled={isSbmtDisabled}
+                  isLoggedIn={isLoggedIn}
                 />
               }
             />
             <Route
               path="/progress"
-              element={<Progress setCurrentPage={setCurrentPage} />}
+              element={
+                <ProtectedRouteElement
+                  component={Progress}
+                  setCurrentPage={setCurrentPage}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
             />
             <Route
               path="/profile"
               element={
-                <Profile
+                <ProtectedRouteElement
+                  component={Profile}
                   setCurrentPage={setCurrentPage}
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
                   setIsLoggedIn={setIsLoggedIn}
                   isSbmtDisabled={isSbmtDisabled}
+                  isLoggedIn={isLoggedIn}
                 />
               }
             />
