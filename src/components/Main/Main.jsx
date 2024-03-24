@@ -5,31 +5,29 @@ import useForm from "../../utils/UseForm";
 import "./Main.css";
 import Cards from "../Cards/Cards";
 import Popup from "../Popup/Popup";
+import {
+  PROT_PROPORTION,
+  PROT_CCALS_OF_A_GRAM,
+  FAT_PROPORTION,
+  FAT_CCALS_OF_A_GRAM,
+  CARBS_PROPORTION,
+  CARBS_CCALS_OF_A_GRAM,
+} from "../../utils/constants";
 
-function Main({ setCurrentPage, isSbmtDisabled }) {
-  //ccals
-  const CCALS_PER_DAY = 1400;
-  //prot
-  const PROT_PROPORTION = 26;
-  const PROT_CCALS_OF_A_GRAM = 4;
-  const PROT_PER_DAY = (
-    (CCALS_PER_DAY * PROT_PROPORTION) /
+function Main({ setCurrentPage, isSbmtDisabled, currentUser }) {
+  const ccalsPerDay = currentUser.ccal;
+  const protPerDay = (
+    (ccalsPerDay * PROT_PROPORTION) /
     PROT_CCALS_OF_A_GRAM /
     100
   ).toFixed(1);
-  //fat
-  const FAT_PROPORTION = 33;
-  const FAT_CCALS_OF_A_GRAM = 9.2;
-  const FAT_PER_DAY = (
-    (CCALS_PER_DAY * FAT_PROPORTION) /
+  const fatPerDay = (
+    (ccalsPerDay * FAT_PROPORTION) /
     FAT_CCALS_OF_A_GRAM /
     100
   ).toFixed(1);
-  //carbs
-  const CARBS_PROPORTION = 41;
-  const CARBS_CCALS_OF_A_GRAM = 4.1;
-  const CARBS_PER_DAY = (
-    (CCALS_PER_DAY * CARBS_PROPORTION) /
+  const carbsPerDay = (
+    (ccalsPerDay * CARBS_PROPORTION) /
     CARBS_CCALS_OF_A_GRAM /
     100
   ).toFixed(1);
@@ -140,7 +138,7 @@ function Main({ setCurrentPage, isSbmtDisabled }) {
       />
       <section className="main__graphics">
         <div className="main__graphics-circle">
-          <h2>{CCALS_PER_DAY - ccals >= 0 ? CCALS_PER_DAY - ccals : 0}</h2>
+          <h2>{ccalsPerDay - ccals >= 0 ? ccalsPerDay - ccals : 0}</h2>
           <span>осталось</span>
         </div>
       </section>
@@ -150,21 +148,21 @@ function Main({ setCurrentPage, isSbmtDisabled }) {
             <span>Белки</span>
             <div></div>
             <span>
-              {prot}/{PROT_PER_DAY} г
+              {prot}/{protPerDay} г
             </span>
           </li>
           <li className="main__add-graphics-list-item">
             <span>Жиры</span>
             <div></div>
             <span>
-              {fat}/{FAT_PER_DAY} г
+              {fat}/{fatPerDay} г
             </span>
           </li>
           <li className="main__add-graphics-list-item">
             <span>Углеводы</span>
             <div></div>
             <span>
-              {carbs}/{CARBS_PER_DAY} г
+              {carbs}/{carbsPerDay} г
             </span>
           </li>
         </ul>
@@ -176,9 +174,7 @@ function Main({ setCurrentPage, isSbmtDisabled }) {
         setSelectedMealId={setSelectedMealId}
         handleMealDelete={handleMealDelete}
       />
-      <MainContext.Provider
-        value={{ CCALS_PER_DAY, PROT_PER_DAY, FAT_PER_DAY, CARBS_PER_DAY }}
-      >
+      <MainContext.Provider value={{ protPerDay, fatPerDay, carbsPerDay }}>
         <Popup
           handlePopupClick={handlePopupClick}
           isPopupVisible={isPopupVisible}

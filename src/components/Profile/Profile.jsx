@@ -47,7 +47,7 @@ function Profile({
         email: data.email,
         weight: data.weight,
         purpose: data.purpose,
-        ccal: data.ccals,
+        ccal: data.ccal,
       });
     } catch (error) {
       console.log(error);

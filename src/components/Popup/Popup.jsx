@@ -22,7 +22,7 @@ function Popup({
   getCcalsList,
   isSbmtDisabled,
 }) {
-  const { PROT_PER_DAY, FAT_PER_DAY, CARBS_PER_DAY } = useContext(MainContext);
+  const { protPerDay, fatPerDay, carbsPerDay } = useContext(MainContext);
   const { values, handleChange, setValues } = UseForm({
     text: "",
     ccals: "",
@@ -235,9 +235,9 @@ function Popup({
 
   useEffect(() => {
     setMealCcals(Math.round(calc(products, "ccals")));
-    setMealProt(Math.round((calc(products, "prot") * 100) / PROT_PER_DAY));
-    setMealFat(Math.round((calc(products, "fat") * 100) / FAT_PER_DAY));
-    setMealCarbs(Math.round((calc(products, "carbs") * 100) / CARBS_PER_DAY));
+    setMealProt(Math.round((calc(products, "prot") * 100) / protPerDay));
+    setMealFat(Math.round((calc(products, "fat") * 100) / fatPerDay));
+    setMealCarbs(Math.round((calc(products, "carbs") * 100) / carbsPerDay));
     if (products.length > 0) {
       setIsSbmtBtnDisabled(false);
     } else {

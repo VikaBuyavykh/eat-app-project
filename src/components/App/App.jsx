@@ -72,6 +72,7 @@ function App() {
                   setCurrentPage={setCurrentPage}
                   isSbmtDisabled={isSbmtDisabled}
                   isLoggedIn={isLoggedIn}
+                  currentUser={currentUser}
                 />
               }
             />
