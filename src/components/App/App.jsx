@@ -71,7 +71,15 @@ function App() {
             />
             <Route
               path="/profile"
-              element={<Profile setCurrentPage={setCurrentPage} />}
+              element={
+                <Profile
+                  setCurrentPage={setCurrentPage}
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                  setIsLoggedIn={setIsLoggedIn}
+                  isSbmtDisabled={isSbmtDisabled}
+                />
+              }
             />
           </Routes>
         </div>

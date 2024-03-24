@@ -5,17 +5,16 @@
   width: 95%;
   max-width: 500px;
   margin: 30px auto 0;
-  @include flex(column, start, stretch, 10px);
+  @include flex(column, start, stretch, 2px);
 
   &__input-group {
+    box-sizing: border-box;
     width: 100%;
+    padding-block: 7px;
+    padding-inline: 15px;
+    background-color: transparentize($bg-color, 0.1);
+    border-radius: 20px;
     @include flex(row, space-between, center, 0px);
-    padding-block: 5px 16px;
-    border-bottom: 1px solid $bg-color;
-
-    &:last-of-type {
-      border-bottom: none;
-    }
 
     label {
       @include text(medium, 400, $color);
@@ -27,14 +26,25 @@
       background-color: transparent;
       outline: none;
       border: none;
+
+      &::placeholder {
+        @include text(medium, 400, transparentize(grey, 0.5));
+      }
     }
+  }
+
+  span {
+    @include text(xx-small, 400, red);
+    min-height: 10.35px;
+    margin-left: 10px;
+    margin-bottom: 10px;
   }
 
   &__btn {
     align-self: flex-start;
     max-width: 250px;
     padding: 7px 30px;
-    background-color: $bg-color;
+    background-color: $color;
     border-radius: 20px;
     outline: none;
     border: none;
@@ -52,6 +62,19 @@
       transform: none;
       border: none;
       background-color: transparentize(grey, 0.5);
+    }
+  }
+
+  a {
+    cursor: pointer;
+    text-decoration: underline;
+    @include text(small, 400, $color);
+    margin-left: 15px;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: darken($color, 15%);
     }
   }
 }

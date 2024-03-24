@@ -15,10 +15,16 @@
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
-  gap: 10px;
+  gap: 2px;
 }
 .profile__input-group {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   width: 100%;
+  padding-block: 7px;
+  padding-inline: 15px;
+  background-color: rgba(166, 106, 106, 0.2019607843);
+  border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -33,11 +39,6 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 0px;
-  padding-block: 5px 16px;
-  border-bottom: 1px solid rgba(166, 106, 106, 0.3019607843);
-}
-.profile__input-group:last-of-type {
-  border-bottom: none;
 }
 .profile__input-group label {
   margin: 0;
@@ -55,12 +56,51 @@
   outline: none;
   border: none;
 }
+.profile__input-group input::-webkit-input-placeholder {
+  margin: 0;
+  font-size: medium;
+  font-weight: 400;
+  color: rgba(128, 128, 128, 0.5);
+}
+.profile__input-group input::-moz-placeholder {
+  margin: 0;
+  font-size: medium;
+  font-weight: 400;
+  color: rgba(128, 128, 128, 0.5);
+}
+.profile__input-group input:-ms-input-placeholder {
+  margin: 0;
+  font-size: medium;
+  font-weight: 400;
+  color: rgba(128, 128, 128, 0.5);
+}
+.profile__input-group input::-ms-input-placeholder {
+  margin: 0;
+  font-size: medium;
+  font-weight: 400;
+  color: rgba(128, 128, 128, 0.5);
+}
+.profile__input-group input::placeholder {
+  margin: 0;
+  font-size: medium;
+  font-weight: 400;
+  color: rgba(128, 128, 128, 0.5);
+}
+.profile span {
+  margin: 0;
+  font-size: xx-small;
+  font-weight: 400;
+  color: red;
+  min-height: 10.35px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
 .profile__btn {
   -ms-flex-item-align: start;
       align-self: flex-start;
   max-width: 250px;
   padding: 7px 30px;
-  background-color: rgba(166, 106, 106, 0.3019607843);
+  background-color: #a66a6a;
   border-radius: 20px;
   outline: none;
   border: none;
@@ -85,4 +125,19 @@
           transform: none;
   border: none;
   background-color: rgba(128, 128, 128, 0.5);
+}
+.profile a {
+  cursor: pointer;
+  text-decoration: underline;
+  margin: 0;
+  font-size: small;
+  font-weight: 400;
+  color: #a66a6a;
+  margin-left: 15px;
+  margin-top: 10px;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+.profile a:hover {
+  color: #7a4949;
 }
