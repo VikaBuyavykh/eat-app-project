@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -25,6 +25,10 @@ function App() {
     return sbmtDisability;
   }
 
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
+
   return (
     <div className="app">
       <div className="app__content">
@@ -42,7 +46,16 @@ function App() {
                 />
               }
             />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  isSbmtDisabled={isSbmtDisabled}
+                  setCurrentUser={setCurrentUser}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              }
+            />
             <Route
               path="/"
               element={

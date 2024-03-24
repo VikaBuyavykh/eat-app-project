@@ -70,7 +70,7 @@ export default function Register({
           setSbmtDisability(true);
         }
       } else {
-        await axios.patch(
+        const { data } = await axios.patch(
           `https://5a5adfe6f3c47fd1.mokky.dev/users/${currentUser.id}`,
           {
             weight: values.weight,
@@ -78,6 +78,12 @@ export default function Register({
             ccal: values.ccal,
           }
         );
+        setCurrentUser({
+          ...currentUser,
+          weight: data.data.weight,
+          purpose: data.data.purpose,
+          ccal: data.data.ccal,
+        });
         setIsAddInfo(false);
         setIsLoggedIn(true);
         navigate("/");
