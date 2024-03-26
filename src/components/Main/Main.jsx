@@ -92,7 +92,8 @@ function Main({ setCurrentPage, isSbmtDisabled, currentUser }) {
       const { data } = await axios.get(
         "https://5a5adfe6f3c47fd1.mokky.dev/days"
       );
-      const dateMeals = data.filter((day) => day.day === values.date);
+      const userMeals = data.filter((meal) => meal.owner === currentUser.id);
+      const dateMeals = userMeals.filter((meal) => meal.day === values.date);
       setCards(dateMeals);
     } catch (error) {
       console.log(error);
@@ -186,6 +187,7 @@ function Main({ setCurrentPage, isSbmtDisabled, currentUser }) {
           getCards={getCards}
           getCcalsList={getCcalsList}
           isSbmtDisabled={isSbmtDisabled}
+          currentUser={currentUser}
         />
       </MainContext.Provider>
     </main>

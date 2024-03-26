@@ -21,6 +21,7 @@ function Popup({
   getCards,
   getCcalsList,
   isSbmtDisabled,
+  currentUser,
 }) {
   const { protPerDay, fatPerDay, carbsPerDay } = useContext(MainContext);
   const { values, handleChange, setValues } = UseForm({
@@ -75,7 +76,9 @@ function Popup({
   }
 
   function handleAddClick() {
-    isAddingAProduct && setIsAddingAProduct(false);
+    if (isAddingAProduct) {
+      setIsAddingAProduct(false);
+    }
   }
 
   function handleProductDelete(e) {
@@ -147,18 +150,19 @@ function Popup({
                 ? "Ужин"
                 : "Перекус",
             products: products,
+            owner: currentUser.id,
           });
           getCards();
         } else {
           await axios.patch(
             `https://5a5adfe6f3c47fd1.mokky.dev/days/${selectedMealId}`,
-            { products: products }
+            { products: products, owner: currentUser.id }
           );
           setCards(
             cards.map((card) =>
               card.id !== Number(selectedMealId)
                 ? card
-                : { ...card, products: products }
+                : { ...card, products: products, owner: currentUser.id }
             )
           );
         }
@@ -200,6 +204,7 @@ function Popup({
           text: elem.name,
         },
       ]);
+      setSelectedProdId(null);
     }
     if (isAddingAProduct) {
       setList(filterById());
