@@ -23,33 +23,46 @@ function Profile({
   });
 
   const [sbmtDisability, setSbmtDisability] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   function handleFormInput(e) {
+    setApiError("");
     setSbmtDisability(isSbmtDisabled(e));
   }
 
   async function handleFormSbmt(e) {
     e.preventDefault();
     try {
-      const { data } = await axios.patch(
-        `https://5a5adfe6f3c47fd1.mokky.dev/users/${currentUser.id}`,
-        {
-          name: values.name,
-          email: values.email,
-          weight: values.weight,
-          purpose: values.purpose,
-          ccal: values.ccals,
-        }
+      const { data } = await axios.get(
+        "https://5a5adfe6f3c47fd1.mokky.dev/users"
       );
-      setCurrentUser({
-        ...currentUser,
-        name: data.name,
-        email: data.email,
-        weight: data.weight,
-        purpose: data.purpose,
-        ccal: data.ccal,
-      });
+      const usersEmails = data
+        .map((user) => user.email)
+        .filter((email) => email !== currentUser.email);
+      if (usersEmails.includes(values.email)) {
+        throw new Error("Пользователь с таким email существует");
+      } else {
+        const { data } = await axios.patch(
+          `https://5a5adfe6f3c47fd1.mokky.dev/users/${currentUser.id}`,
+          {
+            name: values.name,
+            email: values.email,
+            weight: values.weight,
+            purpose: values.purpose,
+            ccal: values.ccals,
+          }
+        );
+        setCurrentUser({
+          ...currentUser,
+          name: data.name,
+          email: data.email,
+          weight: data.weight,
+          purpose: data.purpose,
+          ccal: data.ccal,
+        });
+      }
     } catch (error) {
+      setApiError(error.message);
       console.log(error);
     }
   }
@@ -136,6 +149,7 @@ function Profile({
       <button disabled={sbmtDisability} type="submit" className="profile__btn">
         Редактировать
       </button>
+      <p id="error-api">{apiError}</p>
       <a onClick={logOut}>Выйти из аккаунта</a>
     </form>
   );

@@ -201,6 +201,10 @@
   font-weight: 400;
   color: rgba(255, 255, 240, 0.5);
 }
+.register__form-item input[type=number]::-webkit-outer-spin-button,
+.register__form-item input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 .register p[id=link] {
   margin: 0;
   font-size: x-small;

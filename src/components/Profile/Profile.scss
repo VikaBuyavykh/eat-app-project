@@ -31,6 +31,11 @@
         @include text(medium, 400, transparentize(grey, 0.5));
       }
     }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
   }
 
   span {
@@ -65,12 +70,18 @@
     }
   }
 
+  p {
+    @include text(xx-small, 400, red);
+    margin-top: 3px;
+    margin-left: 15px;
+    min-height: 10.35px;
+  }
+
   a {
     cursor: pointer;
     text-decoration: underline;
     @include text(small, 400, $color);
     margin-left: 15px;
-    margin-top: 10px;
     transition: color 0.3s ease;
 
     &:hover {

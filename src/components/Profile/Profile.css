@@ -86,6 +86,10 @@
   font-weight: 400;
   color: rgba(128, 128, 128, 0.5);
 }
+.profile__input-group input[type=number]::-webkit-outer-spin-button,
+.profile__input-group input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 .profile span {
   margin: 0;
   font-size: xx-small;
@@ -126,6 +130,15 @@
   border: none;
   background-color: rgba(128, 128, 128, 0.5);
 }
+.profile p {
+  margin: 0;
+  font-size: xx-small;
+  font-weight: 400;
+  color: red;
+  margin-top: 3px;
+  margin-left: 15px;
+  min-height: 10.35px;
+}
 .profile a {
   cursor: pointer;
   text-decoration: underline;
@@ -134,7 +147,6 @@
   font-weight: 400;
   color: #a66a6a;
   margin-left: 15px;
-  margin-top: 10px;
   -webkit-transition: color 0.3s ease;
   transition: color 0.3s ease;
 }

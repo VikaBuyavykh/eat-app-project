@@ -80,9 +80,9 @@ export default function Register({
         );
         setCurrentUser({
           ...currentUser,
-          weight: data.data.weight,
-          purpose: data.data.purpose,
-          ccal: data.data.ccal,
+          weight: data.weight,
+          purpose: data.purpose,
+          ccal: data.ccal,
         });
         setIsAddInfo(false);
         setIsLoggedIn(true);

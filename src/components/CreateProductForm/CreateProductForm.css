@@ -252,3 +252,7 @@
     font-size: medium;
   }
 }
+.creation__inputs-group-container-item input[type=number]::-webkit-outer-spin-button,
+.creation__inputs-group-container-item input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
