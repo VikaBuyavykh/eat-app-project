@@ -197,6 +197,8 @@
   border-radius: 50%;
   background-color: rgba(166, 106, 106, 0.3019607843);
   border: none;
+  padding: 0;
+  margin: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -237,7 +239,6 @@
 }
 .card__content-btn-section button img[id=button] {
   width: 15px;
-  height: 15px;
   -o-object-fit: contain;
      object-fit: contain;
   -o-object-position: center;
@@ -246,7 +247,6 @@
 @media screen and (min-width: 480px) {
   .card__content-btn-section button img[id=button] {
     width: 20px;
-    height: 20px;
   }
 }
 .card__bg {

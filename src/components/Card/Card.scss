@@ -118,6 +118,8 @@
         @include circle(20px);
         background-color: $bg-color;
         border: none;
+        padding: 0;
+        margin: 0;
         @include flex(column, center, center, 0px);
         transition: transform 0.5s ease;
         cursor: pointer;
@@ -136,12 +138,10 @@
 
         img[id="button"] {
           width: 15px;
-          height: 15px;
           @include img(contain);
 
           @include media_sm {
             width: 20px;
-            height: 20px;
           }
         }
       }
