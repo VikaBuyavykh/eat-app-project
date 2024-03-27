@@ -213,6 +213,8 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   -webkit-transition: -webkit-transform 0.5s ease;
   transition: -webkit-transform 0.5s ease;
   transition: transform 0.5s ease;

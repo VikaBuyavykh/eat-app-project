@@ -22,6 +22,7 @@
 
     input {
       @include text(medium, 400, ivory);
+      width: 60%;
       text-align: right;
       background-color: transparent;
       outline: none;
