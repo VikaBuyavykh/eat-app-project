@@ -15,7 +15,17 @@ import {
 } from "../../utils/constants";
 
 function Main({ setCurrentPage, isSbmtDisabled, currentUser }) {
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [selectedMealId, setSelectedMealId] = useState(null);
+  const [cards, setCards] = useState([]);
+  const [ccalsList, setCcalsList] = useState([]);
+  const [ccals, setCcals] = useState(0);
+  const [prot, setProt] = useState(0);
+  const [fat, setFat] = useState(0);
+  const [carbs, setCarbs] = useState(0);
+
   const ccalsPerDay = useMemo(() => currentUser.ccal, [currentUser]);
+  const restCcals = useMemo(() => ccalsPerDay - ccals, [ccalsPerDay, ccals]);
   const protPerDay = useMemo(
     () =>
       ((ccalsPerDay * PROT_PROPORTION) / PROT_CCALS_OF_A_GRAM / 100).toFixed(1),
@@ -41,15 +51,6 @@ function Main({ setCurrentPage, isSbmtDisabled, currentUser }) {
   let dd = date.getDate();
   if (dd < 10) dd = "0" + dd;
   const { values, handleChange } = useForm({ date: `${yyyy}-${mm}-${dd}` });
-
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [selectedMealId, setSelectedMealId] = useState(null);
-  const [cards, setCards] = useState([]);
-  const [ccalsList, setCcalsList] = useState([]);
-  const [ccals, setCcals] = useState(0);
-  const [prot, setProt] = useState(0);
-  const [fat, setFat] = useState(0);
-  const [carbs, setCarbs] = useState(0);
 
   function handlePopupClick() {
     isPopupVisible ? setIsPopupVisible(false) : setIsPopupVisible(true);
@@ -141,7 +142,7 @@ function Main({ setCurrentPage, isSbmtDisabled, currentUser }) {
       />
       <section className="main__graphics">
         <div className="main__graphics-circle">
-          <h2>{ccalsPerDay - ccals >= 0 ? ccalsPerDay - ccals : 0}</h2>
+          <h2>{restCcals >= 0 ? restCcals : 0}</h2>
           <span>осталось</span>
         </div>
       </section>
