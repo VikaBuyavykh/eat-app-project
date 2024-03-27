@@ -136,10 +136,12 @@
 
         img[id="button"] {
           width: 15px;
+          height: 15px;
           @include img(contain);
 
           @include media_sm {
             width: 20px;
+            height: 20px;
           }
         }
       }

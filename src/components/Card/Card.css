@@ -237,6 +237,7 @@
 }
 .card__content-btn-section button img[id=button] {
   width: 15px;
+  height: 15px;
   -o-object-fit: contain;
      object-fit: contain;
   -o-object-position: center;
@@ -245,6 +246,7 @@
 @media screen and (min-width: 480px) {
   .card__content-btn-section button img[id=button] {
     width: 20px;
+    height: 20px;
   }
 }
 .card__bg {
