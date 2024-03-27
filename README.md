@@ -1,8 +1,26 @@
-# React + Vite
+# Project Eat-App-Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Проект представляет собой персональный дневник, позволяющий считать КБЖУ и следить за динамикой сброса веса.
 
-Currently, two official plugins are available:
+Проект находится в стадии разработки, но на данный момент реализован следующий функционал:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- регистрация, авторизация, редактирование профиля
+- ведение дневника подсчета калорий, отслеживание дневной нормы белка, жиров и углеводов
+- просмотр и реактирование страниц дневника за предыдущие дни
+- добавление новых единиц в список возможных продуктов
+
+## Доработка
+
+В проекте в ближайшем будущем появится раздел прогресса, который позволит отслеживать динамику сброса веса.
+
+Также предстоит рефакторинг (все повторяющиеся места будут вынесены в отдельный компонент и переиспользованы) и дебаггинг возможных ошибок.
+
+## Стек технологий
+
+- React
+- SCSS
+- Axios
+
+## Ссылка на проект
+
+Задеплоенный рабочий проект доступен по [ссылке](https://eat-app-project.vercel.app/)
