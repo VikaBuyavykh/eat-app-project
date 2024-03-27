@@ -3,6 +3,7 @@
 
 .creation {
   width: 100%;
+  box-sizing: border-box;
   @include flex(column, start, center, 20px);
 
   &__input-group,
@@ -90,15 +91,15 @@
       @include flex(row, space-between, center, 5px);
 
       &-item {
-        width: 45px;
+        max-width: 45px;
         @include flex(column, start, center, 5px);
 
         @include media_xs {
-          width: 55px;
+          max-width: 55px;
         }
 
         @include media_sm {
-          width: 65px;
+          max-width: 65px;
         }
 
         label {
