@@ -87,6 +87,7 @@
     }
 
     &-container {
+      width: 95%;
       padding-top: 7px;
       @include flex(row, space-between, center, 5px);
 
@@ -115,7 +116,7 @@
         }
 
         input {
-          width: 80%;
+          width: 90%;
           border-radius: 10px;
           border: 1px solid $bg-color;
           @include text(x-small, 400, $color);
