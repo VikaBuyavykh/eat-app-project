@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import MainContext from "../../utils/MainContext";
 import useForm from "../../utils/UseForm";
@@ -15,22 +15,24 @@ import {
 } from "../../utils/constants";
 
 function Main({ setCurrentPage, isSbmtDisabled, currentUser }) {
-  const ccalsPerDay = currentUser.ccal;
-  const protPerDay = (
-    (ccalsPerDay * PROT_PROPORTION) /
-    PROT_CCALS_OF_A_GRAM /
-    100
-  ).toFixed(1);
-  const fatPerDay = (
-    (ccalsPerDay * FAT_PROPORTION) /
-    FAT_CCALS_OF_A_GRAM /
-    100
-  ).toFixed(1);
-  const carbsPerDay = (
-    (ccalsPerDay * CARBS_PROPORTION) /
-    CARBS_CCALS_OF_A_GRAM /
-    100
-  ).toFixed(1);
+  const ccalsPerDay = useMemo(() => currentUser.ccal, [currentUser]);
+  const protPerDay = useMemo(
+    () =>
+      ((ccalsPerDay * PROT_PROPORTION) / PROT_CCALS_OF_A_GRAM / 100).toFixed(1),
+    [ccalsPerDay]
+  );
+  const fatPerDay = useMemo(
+    () =>
+      ((ccalsPerDay * FAT_PROPORTION) / FAT_CCALS_OF_A_GRAM / 100).toFixed(1),
+    [ccalsPerDay]
+  );
+  const carbsPerDay = useMemo(
+    () =>
+      ((ccalsPerDay * CARBS_PROPORTION) / CARBS_CCALS_OF_A_GRAM / 100).toFixed(
+        1
+      ),
+    [ccalsPerDay]
+  );
 
   const date = new Date();
   const yyyy = date.getFullYear();
